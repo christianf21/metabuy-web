@@ -127,6 +127,43 @@
             <div class="row">
                 
                 <div class="container-fluid" id="wrapper">
+                    
+                    
+                    <div class="col-lg-4">
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading package-head starter-prime" style="text-align: center;">
+                                Starter Prime
+                                <div class="package-info">
+                                    One time payment
+                                </div>
+                            </div>
+
+                            <div class="panel-body" style="color:black;">
+                                <div class="package-price">
+                                    $150
+                                </div>
+                            </div>
+
+                            <ul class="list-group" style="color:black;text-align: center;">
+                                <li class="list-group-item normal-row">Unlimited Accounts</li>
+                                <li class="list-group-item normal-row">Only Critical Updates Free</li>
+                                <li class="list-group-item normal-row">Twitter Scanner</li>
+                                <li class="list-group-item normal-row">Any Shoe size (1)</li>
+                            </ul>
+                            <br />
+                            <p style="text-align:center;">
+                                  <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                            </p>
+                        </div>
+
+                    </div>
+                    
+                    
+                    
+                    
+                    
                     <div class="col-lg-4">
 
                         <div class="panel panel-default">
@@ -148,7 +185,8 @@
                                 <li class="list-group-item normal-row">Unlimited Accounts</li>
                                 <li class="list-group-item normal-row">Free Minor Updates</li>
                                 <li class="list-group-item normal-row">Twitter Scanner</li>
-                                <li class="list-group-item normal-row">Any Shoe size</li>
+                                <li class="list-group-item normal-row">Countdown Support</li>
+                                <li class="list-group-item normal-row">Any Shoe size (multiple)</li>
                             </ul>
                             <br />
                             <p style="text-align:center;">
@@ -176,11 +214,12 @@
                             </div>
 
                             <ul class="list-group" style="color:black;text-align: center;">
-                                 <li class="list-group-item normal-row">Unlimited Accounts</li>
+                                <li class="list-group-item normal-row">Unlimited Accounts</li>
                                 <li class="list-group-item normal-row">Free Minor Updates</li>
                                 <li class="list-group-item normal-row">Free Mayor Updates</li>
                                 <li class="list-group-item normal-row">Twitter Scanner</li>
-                                <li class="list-group-item normal-row">Any Shoe size</li>
+                                <li class="list-group-item normal-row">Countdown Support</li>
+                                <li class="list-group-item normal-row">Any Shoe size (multiple)</li>
                                 <li class="list-group-item normal-row">Smart Shoe Size Picker</li>
                                 <li class="list-group-item normal-row">Advanced Options</li>
                             </ul>
@@ -229,8 +268,8 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                        <h3>Contact</h3>
+                       <p>Got any questions? Drop us a line at <a href="mailto:contact@primenikebot.com">contact@primenikebot.com</a></p>
                     </div>
                     <div class="footer-col col-md-4">
                         <h3></h3>
@@ -247,8 +286,8 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <h3>About Us</h3>
+                        <p>We're a group of full-time Software Developers who love Sneakers and didn't like any of the current bots.<br /> So we made our own.</p>
                     </div>
                 </div>
             </div>
