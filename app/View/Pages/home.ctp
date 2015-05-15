@@ -142,15 +142,15 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $150
+                                    $139
                                 </div>
                             </div>
 
                             <ul class="list-group" style="color:black;text-align: center;">
                                 <li class="list-group-item normal-row">Unlimited Accounts</li>
-                                <li class="list-group-item normal-row">Only Critical Updates Free</li>
-                                <li class="list-group-item normal-row">Twitter Scanner</li>
-                                <li class="list-group-item normal-row">Any Shoe size (1)</li>
+                                <li class="list-group-item normal-row"><span  data-toggle="tooltip" title="Only updates required for the functioning of the bot." data-placement="right">Only Critical Updates Free</span></li>
+                                <li class="list-group-item normal-row"><span>Twitter Scanner</span></li>
+                                <li class="list-group-item normal-row"><span  data-toggle="tooltip" title="One shoe size per use." data-placement="right">Any Shoe size (1)</span></li>
                             </ul>
                             <br />
                             <p style="text-align:center;">
@@ -177,7 +177,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $220
+                                    $229
                                 </div>
                             </div>
 
@@ -209,7 +209,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $320
+                                    $329
                                 </div>
                             </div>
 
