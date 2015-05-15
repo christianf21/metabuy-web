@@ -1,36 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Freelancer - Start Bootstrap Theme</title>
-
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
 <body id="page-top" class="index">
 
     <?php echo $this->element("navbar"); ?>
@@ -44,8 +14,8 @@
                     <div class="intro-text">
                         <span class="name">All the best in one</span>
                         <hr class="star-light">
-                        <span class="skills">We're not the first bot, but we sure are the first to gather all the best features from other bots, <br />
-                                            we took out the unnecesesary ones, made it smarter and we grouped them all into one:<br /> easy to use, sleek looking, cross-platform and efficient bot.</span>
+                        <span class="skills">We're not the first, but we've been studying how people use bots and gathered the best features, <br />
+                                            took out the unnecesesary ones, made it smarter and we grouped them all into one:<br /> easy to use, sleek looking, cross-platform and efficient bot.</span>
                     </div>
                 </div>
             </div>
@@ -57,72 +27,89 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Why Prime Bot</h2>
+                    <h3 style="font-size:32px;"><span style="color:rgb(0, 148, 213);">Why Choose:</span> Prime NikeBot</h3>
                     <hr class="star-primary">
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-4">
+                    
+                    <table class="table table-hover features-table">
+                        <tbody>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Unlimited Accounts</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Countdown Support</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Any Size Support</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Very Easy to Use (No Setup Required)</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Multi-threaded</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Advanced tweeking options</td>
+                            </tr>
+                        </tbody>
+                    </table>
+              
+                </div>
+                
+                <div class="col-sm-4">
+                    <table class="table table-hover features-table">
+                        <tbody>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Free Updates Forever*</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Smart Shoesize Picker</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Cross-platform Support</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>No twitter API request limits</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Profesionally programmed Bot</td>
+                            </tr>
+                            <tr>
+                                <td class="icon-td"><img class="check-icon" src="<?php echo $this->base."/img/check.png" ?>"></td>
+                                <td>Automatically checks for updates</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
                 <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa">222</i>
+                        <div class="panel panel-success">
+                            <div class="panel-heading" style="font-weight: bold;">It Has Never Been This Easy and Efficient!</div>
+                            <div class="panel-body">
+                                We have been working for months straight and didn't stop until we built the Bot we've all wanted.<br /><br /> And now its here and its even better. 
+                              <br /><br />
+                              You can check out our bot packages and choose the one that fits you best:<br /><br />
+                              <p style="text-align:center;">
+                                  <a href="#" class="btn btn-primary" id="why-button">Show Me Bot Packages</a>
+                              </p>
                             </div>
                         </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
-                    </a>
                 </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/cake.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/circus.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/game.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/safe.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/submarine.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-            </div>
+                
         </div>
     </section>
 
@@ -131,23 +118,87 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h3>Packages</h3>
                     <hr class="star-light">
                 </div>
             </div>
+            
+            
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                <div class="col-lg-3 col-lg-offset-2">
+                   
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading package-head" style="text-align: center;">
+                            Basic Prime
+                            <div class="package-info">
+                                One time payment
+                            </div>
+                        </div>
+                        
+                        <div class="panel-body" style="color:black;">
+                            <div class="package-price">
+                                $220
+                            </div>
+                        </div>
+                        
+                        <ul class="list-group" style="color:black;text-align: center;">
+                            <li class="list-group-item normal-row">Unlimited Accounts</li>
+                            <li class="list-group-item normal-row">Free Minor Updates</li>
+                            <li class="list-group-item normal-row">Twitter Scanner</li>
+                            <li class="list-group-item normal-row">Any Shoe size</li>
+                        </ul>
+                        <br />
+                        <p style="text-align:center;">
+                              <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                        </p>
+                    </div>
+                    
                 </div>
-                <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                
+                <div class="col-lg-3 col-lg-offset-2">
+                   
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading package-head complete-prime" style="text-align: center;">
+                            Complete Prime
+                            <div class="package-info">
+                                One time payment
+                            </div>
+                        </div>
+                        
+                        <div class="panel-body" style="color:black;">
+                            <div class="package-price">
+                                $320
+                            </div>
+                        </div>
+                        
+                        <ul class="list-group" style="color:black;text-align: center;">
+                             <li class="list-group-item normal-row">Unlimited Accounts</li>
+                            <li class="list-group-item normal-row">Free Minor and Mayor Updates</li>
+                            <li class="list-group-item normal-row">Twitter Scanner</li>
+                            <li class="list-group-item normal-row">Any Shoe size</li>
+                            <li class="list-group-item normal-row">Smart Shoe Size Picker</li>
+                            <li class="list-group-item normal-row">Advanced Options</li>
+                        </ul>
+                        <br />
+                        <p style="text-align:center;">
+                              <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                        </p>
+                    </div>
+                    
                 </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+                
+                
+                
+                <div class="col-lg-3 col-lg-offset-2 text-center">
                     <a href="#" class="btn btn-lg btn-outline">
                         <i class="fa fa-download"></i> Download Theme
                     </a>
                 </div>
             </div>
+            
+            
         </div>
     </section>
 

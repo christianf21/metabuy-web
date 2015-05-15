@@ -37,13 +37,13 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
-/**
- * Displays a view
- *
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
+        
+        public function home()
+        {
+            $this->set("title","PRIME Nike Bot - The best nikebot out there, for an affordable price.");
+        }
+        
+        
 	public function display() {
 		$path = func_get_args();
 

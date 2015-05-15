@@ -9,7 +9,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">prime <span style="color:black;">nikebot</span></a>
+                <a class="navbar-brand" href="#page-top">
+                    prime 
+                    <span style="color:black;">nikebot</span>
+                    <span class="label label-default" id="new-label">New</span></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
