@@ -113,7 +113,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Packages Section -->
     <section class="success" id="packages">
         <div class="container">
             <div class="row">
@@ -124,11 +124,34 @@
             </div>
             
             
+            <?php
+            
+                $offer = true;
+            
+                $price = array(
+                    'starter'=>139,
+                    'basic'=>229,
+                    'complete'=>329
+                );
+                
+                if($offer)
+                {
+                    $amount = 0.45;
+                    
+                    foreach($price as $index=>$p)
+                    {
+                        $new_price = $p - ($p * $amount);
+                        $price[$index] = $new_price;
+                    }
+                }
+                
+            
+            ?>
             <div class="row">
                 
                 <div class="container-fluid" id="wrapper">
                     
-                    
+                    <!-- STARTER PACKAGE -->
                     <div class="col-lg-4">
 
                         <div class="panel panel-default">
@@ -142,7 +165,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $139
+                                    $<?php echo $price['starter'] ?>
                                 </div>
                             </div>
 
@@ -150,7 +173,9 @@
                                 <li class="list-group-item normal-row">Unlimited Accounts</li>
                                 <li class="list-group-item normal-row"><span  data-toggle="tooltip" title="Only updates required for the functioning of the bot." data-placement="right">Only Critical Updates Free</span></li>
                                 <li class="list-group-item normal-row"><span>Twitter Scanner</span></li>
+                                <li class="list-group-item normal-row">Customer Support Email</li>
                                 <li class="list-group-item normal-row"><span  data-toggle="tooltip" title="One shoe size per use." data-placement="right">Any Shoe size (1)</span></li>
+                                <li class="list-group-item normal-row">Upgrade to Basic (80$)</li>
                             </ul>
                             <br />
                             <p style="text-align:center;">
@@ -163,7 +188,7 @@
                     
                     
                     
-                    
+                    <!-- BASIC PACKAGE -->
                     <div class="col-lg-4">
 
                         <div class="panel panel-default">
@@ -177,7 +202,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $229
+                                    $<?php echo $price['basic'] ?>
                                 </div>
                             </div>
 
@@ -186,7 +211,9 @@
                                 <li class="list-group-item normal-row">Free Minor Updates</li>
                                 <li class="list-group-item normal-row">Twitter Scanner</li>
                                 <li class="list-group-item normal-row">Countdown Support</li>
+                                <li class="list-group-item normal-row">Customer Support Email & Skype</li>
                                 <li class="list-group-item normal-row">Any Shoe size (multiple)</li>
+                                <li class="list-group-item normal-row">Upgrade to Complete (90$)</li>
                             </ul>
                             <br />
                             <p style="text-align:center;">
@@ -196,6 +223,7 @@
 
                     </div>
 
+                    <!-- COMPLETE PACKAGE -->
                     <div class="col-lg-4">
 
                         <div class="panel panel-default">
@@ -209,7 +237,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $329
+                                    $<?php echo $price['complete'] ?>
                                 </div>
                             </div>
 
@@ -219,6 +247,7 @@
                                 <li class="list-group-item normal-row">Free Mayor Updates</li>
                                 <li class="list-group-item normal-row">Twitter Scanner</li>
                                 <li class="list-group-item normal-row">Countdown Support</li>
+                                <li class="list-group-item normal-row">Customer Support Email & Skype</li>
                                 <li class="list-group-item normal-row">Any Shoe size (multiple)</li>
                                 <li class="list-group-item normal-row">Smart Shoe Size Picker</li>
                                 <li class="list-group-item normal-row">Advanced Options</li>
@@ -253,14 +282,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-2">
+                    
+                </div>
+                <div class="col-lg-8">
                     <p>Nike releases are very limited, and the only way to buy them at retail price is to own a Bot. </p>
                     <p>Bots are little programs that automate the process of buying in a webstore. This means, they can buy an item from a store
-                        in a matter of millisenconds, compared to the time it takes for a real person to click on the item > add to cart > clicks the cart > goes to checkout > etc...</p>
+                        in a matter of millisenconds, compared to the time it takes for a real person to click on the item > choose size > add to cart > clicks the cart > goes to checkout > etc...</p>
                     <p>All our bots automatically scan twitter for the release link, but if you have an Early Link (which happens often as well), then we have that
                     option enabled too.</p>
                     <p>Some bots use Twitter API to scan, we use a different method and have proven to be more succesfull, and this frees us of twitter request limits.</p>
                     <p>So stop missing out on releases and <a class="page-scroll" style="color:blue;" href="#packages">get a bot</a> that will save you money, this is a must have for all Sneaker heads.</p>
+                </div>
+                <div class="col-lg-2">
+                    <p>All our bots automatically scan twitter for the release link, but if you have an Early Link (which happens often as well), then we have that
+                    option enabled too.</p>
                 </div>
             </div>
         </div>
