@@ -12,9 +12,9 @@
                 <div class="col-lg-12">
                     <!--img class="img-responsive" src="img/profile.png" alt=""-->
                     <div class="intro-text">
-                        <span class="name">All the best in one</span>
+                        <span class="name">All the best in one bot</span>
                         <hr class="star-light">
-                        <span class="skills">We're not the first, but we've been studying how people use bots and gathered the best features, <br />
+                        <span class="skills">We're not the first, but we've been studying at how people use bots and gathered the best features, <br />
                                             took out the unnecesesary ones, made it smarter and we grouped them all into one:<br /> easy to use, sleek looking, cross-platform and efficient bot.</span>
                     </div>
                 </div>
@@ -254,9 +254,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                 
+                    <p>Nike releases are very limited, and the only way to buy them at retail price is to own a Bot. </p>
+                    <p>Bots are little programs that automate the process of buying in a webstore. This means, they can buy an item from a store
+                        in a matter of millisenconds, compared to the time it takes for a real person to click on the item > add to cart > clicks the cart > goes to checkout > etc...</p>
+                    <p>All our bots automatically scan twitter for the release link, but if you have an Early Link (which happens often as well), then we have that
+                    option enabled too.</p>
+                    <p>Some bots use Twitter API to scan, we use a different method and have proven to be more succesfull, and this frees us of twitter request limits.</p>
+                    <p>So stop missing out on releases and <a class="page-scroll" style="color:blue;" href="#packages">get a bot</a> that will save you money, this is a must have for all Sneaker heads.</p>
                 </div>
             </div>
         </div>

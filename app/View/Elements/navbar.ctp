@@ -22,13 +22,13 @@
                         <a href="#page-top2"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#howitworks">How It Works</a>
-                    </li>
-                    <li class="page-scroll">
                         <a href="#features">Features</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#packages">Pricing</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#howitworks">How It Works</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#login2">login</a>
