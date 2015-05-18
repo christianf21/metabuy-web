@@ -1,6 +1,6 @@
 <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top main-nav">
+        <div class="container" id>
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -11,27 +11,34 @@
                 </button>
                 <a class="navbar-brand" href="#page-top">
                     prime 
-                    <span style="color:black;">nikebot</span>
-                    <span class="label label-default" id="new-label">New</span></a>
+                <span style="color:black;">nikebot</span>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right username-nav">
                     <li class="hidden">
                         <a href="#page-top2"></a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#features">Features</a>
+                    <li>
+                        <a href="javascript:void(0)">Dashboard</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#packages">Pricing</a>
+                    <li>
+                        <a href="javascript:void(0)">My Bots</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#howitworks">How It Works</a>
+                    <li>
+                        <a href="javascript:void(0)">Store</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="<?php echo $this->base.'/users/login' ?>">login</a>
+                    <li>
+                        <a href="javascript:void(0)">Affiliate</a>
+                    </li>
+                    <li class='nohover'>
+                        <a class="nohover"> |</a>
+                    </li>
+                    <li>
+                        <?php if($this->Session->check('userloggedIn')): ?>
+                        <a href="javascript:void(0)">Welcome back, <span style='color:black;'><?php echo $this->Session->read('userName')?></span></a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>

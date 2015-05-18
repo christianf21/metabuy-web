@@ -542,3 +542,7 @@ footer .footer-below {
 {
     text-align: center;
 }
+
+.main-nav{
+    max-height: 120px;
+}

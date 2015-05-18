@@ -32,21 +32,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-        
-         <?php 
-     
-            echo $this->Html->css('bootstrap.min');
-            echo $this->Html->css('freelancer.css');
-            echo $this->Html->css('font-awesome/css/font-awesome.min.css');
-         ?>
     
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+     <?php 
+     
+        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('primeweb.css');
+        echo $this->Html->css('font-awesome/css/font-awesome.min.css');
+     ?>
+        
+   
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -59,14 +53,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 
     
-    
-    
 </head>
 <body>
-	<div id="container">
+        <header>
+            <?php echo $this->element("navbar_system"); ?>
+        </header>
+	<div id="wrapper-container">
 		<?php echo $this->Session->flash(); ?>
 
-			<?php echo $this->fetch('content'); ?>
+                <?php echo $this->fetch('content'); ?>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 </body>

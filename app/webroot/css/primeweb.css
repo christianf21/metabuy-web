@@ -1,0 +1,71 @@
+/*!
+ * Start Bootstrap - Freelancer Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    overflow-x: hidden;
+}
+
+p {
+    font-size: 20px;
+}
+
+p.small {
+    font-size: 16px;
+}
+
+/* BOOTSTRAP OVERRIDES */
+.navbar-default{background-color:#0094D5;}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+    color:black;
+}
+
+
+
+header .intro-text .name {
+    display: block;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+header .intro-text .skills {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.main-nav
+{
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+#wrapper-container
+{
+    margin-top:    140px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-wrapper
+{
+    max-width: 300px;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+    color:white;
+}
+
+.username-nav
+{
+    text-transform: none;
+}
+
+.nohover:hover{
+    color: white!important;
+}

@@ -41,6 +41,7 @@ class PagesController extends AppController {
         public function home()
         {
             $this->set("title","PRIME Nike Bot - The best nikebot out there, for an affordable price.");
+            $this->layout = "default";
         }
         
         
