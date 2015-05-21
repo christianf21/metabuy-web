@@ -126,12 +126,12 @@
             
             <?php
             
-                $offer = true;
+                $offer = false;
             
                 $price = array(
-                    'starter'=>139,
-                    'basic'=>229,
-                    'complete'=>329
+                    'starter'=>95,
+                    'basic'=>125,
+                    'complete'=>150
                 );
                 
                 if($offer)

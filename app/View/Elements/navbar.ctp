@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">
+                <a class="navbar-brand" href="<?php echo $this->base."/" ?>">
                     prime 
                     <span style="color:black;">nikebot</span>
                     <span class="label label-default" id="new-label">New</span></a>
@@ -31,7 +31,7 @@
                         <a href="#howitworks">How It Works</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="<?php echo $this->base.'/users/login' ?>">login</a>
+                        <a href="<?php echo $this->base.'/system/dashboard' ?>">login</a>
                     </li>
                 </ul>
             </div>

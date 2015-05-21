@@ -544,5 +544,56 @@ footer .footer-below {
 }
 
 .main-nav{
-    max-height: 120px;
+    max-height: 68px;
+}
+
+#navegador-top
+{
+    max-height:100px;
+    margin-top: 0px;
+    padding-top:0px;
+}
+
+.menu-chosen
+{
+    color: black !important;
+}
+.list-group-item
+{
+    background-color: #E7E7E7;
+}
+
+.list-group-item:hover, .list-group-item.active:hover
+{
+    background-color: rgba(163, 163, 163, 0.95);
+    border-color: rgba(163, 163, 163, 0.95);
+    color:white;
+    cursor:pointer;
+}
+
+.list-group-item.active
+{
+    background-color: rgba(163, 163, 163, 0.95);
+    border-color: rgba(163, 163, 163, 0.95);
+}
+
+.table-label-info{
+      background-color: rgb(231, 231, 231);
+          text-align: center;
+}
+
+#user-info
+{
+    max-width: 450px;
+}
+
+#user-info-table
+{
+    max-width: 400px;
+
+}
+
+.panel-body p
+{
+    font-size:15px;
 }
