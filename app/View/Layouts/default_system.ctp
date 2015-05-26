@@ -35,7 +35,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             echo $this->Html->script('jquery.validate.min');
             
             echo $this->Html->script('primeweb');
-	
+            echo $this->Html->script('jsValidation');
+            
             echo $this->Html->css('bootstrap.min');
             echo $this->Html->css('freelancer.css');
             echo $this->Html->css('primeweb.css');
