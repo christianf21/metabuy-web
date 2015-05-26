@@ -31,6 +31,9 @@
                         <a href="#howitworks">How It Works</a>
                     </li>
                     <li class="page-scroll">
+                        <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>">Join Now</a>
+                    </li>
+                    <li class="page-scroll">
                         <a href="<?php echo $this->base.'/system/dashboard' ?>">login</a>
                     </li>
                 </ul>

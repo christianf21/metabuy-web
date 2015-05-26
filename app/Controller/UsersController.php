@@ -65,7 +65,7 @@ class UsersController extends AppController {
     
     public function register()
     {
-        $this->layout = "main";
+        $this->layout = "main_system";
         $flag = false;
         
         if($flag)
