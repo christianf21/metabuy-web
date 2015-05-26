@@ -28,7 +28,7 @@
                     <tr>
                         <td class="table-label-info">Name</td>
                         <td>
-                            <a href="#" id="full-name" data-pk="1" data-title="Enter full name" data-type="text" data-url="/editProfile"><?php echo $user['User']['name'] . " " . $user['User']['last_name'] ?></a>
+                            <?php echo $user['User']['name'] . " " . $user['User']['last_name'] ?>
                         
                             <?php if(empty($user['User']['name'])): ?>
                                 <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"editProfile")) ?>" class="normal-link">Edit your info</a>
