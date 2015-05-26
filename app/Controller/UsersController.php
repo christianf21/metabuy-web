@@ -163,12 +163,12 @@ class UsersController extends AppController {
             
             if($this->User->save($this->request->data))
             {
-                $this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
+                //$this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
                 
                 $this->__loginUser($this->User->id);
                 $this->Session->write("notVerified",1);
                 
-                $this->Session->setFlash("Finish your profile details below..","info");
+                $this->Session->setFlash("Almost done! We sent you a confirmation email, please go and verify your email :)","info");
                 $this->redirect(array("controller"=>"system","action"=>"dashboard"));
             }
             else

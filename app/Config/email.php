@@ -45,34 +45,20 @@ class EmailConfig {
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
-
-        public $smtp = array(
+        
+	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('no-responder@cusica.com' => 'Prime NikeBot'),
-		'host' => 'ssl://a2s80.a2hosting.com',
-		'port' => 465,
-		'timeout' => 30,
-		'username' => 'no-responder@cusica.com',
-		'password' => '1406.cusica',
-		'client' => null,
-		'log' => true,
+		'from' => array('no-reply@primenikebot.com' => 'Prime NikeBot'),
+		'host' => 'localhost'//,
+		//'port' => 465,
+		//'timeout' => 30,
+		//'username' => 'contacto-paginaweb@gomaespumacolor.com',
+		//'password' => 'Jackie21!',
+		//'client' => null,
+		//'log' => false,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
-        
-//	public $smtp = array(
-//		'transport' => 'Smtp',
-//		'from' => array('no-reply@primenikebot.com' => 'Prime NikeBot'),
-//		'host' => 'localhost'//,
-//		//'port' => 465,
-//		//'timeout' => 30,
-//		//'username' => 'contacto-paginaweb@gomaespumacolor.com',
-//		//'password' => 'Jackie21!',
-//		//'client' => null,
-//		//'log' => false,
-//		//'charset' => 'utf-8',
-//		//'headerCharset' => 'utf-8',
-//	);
 
 	public $fast = array(
 		'from' => 'you@localhost',
