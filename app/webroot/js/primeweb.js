@@ -9,11 +9,7 @@ $(document).ready(function(){
    // $("#login-btn").modal();
     $('#alert_messages').animate({opacity: 1.0}, 6000).fadeOut();
     
-    $.fn.editable.defaults.mode = 'inline';
-    $('a#first-name').editable();
-    
     // Validator methods
-    
     $.validator.addMethod("uniqueUsername",function(value,element){
        var valido = false;
        
@@ -67,6 +63,17 @@ $(document).ready(function(){
         return valido;
     }, "Passwords don't match...");
     
+    $.validator.addMethod("minlengthpass",function(value,element){
+       var valido = false;
+      
+            if(value.length > 7)
+            {
+                valido = true;
+            }
+           
+        return valido;
+    }, "Passwords must be at least 8 characters long");
+    
     
     // Validate Register and Login
     
@@ -88,7 +95,7 @@ $(document).ready(function(){
         rules: {
             "data[username]":{required: true,uniqueUsername:true},
             "data[email]":{required:true,email:true, uniqueEmail:true},
-            "data[password]":{required:true},
+            "data[password]":{required:true,minlengthpass:true},
             "data[confirm_password]":{required:true,matchesPassword:true}
         },
         messages: {

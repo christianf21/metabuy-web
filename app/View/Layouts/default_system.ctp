@@ -34,6 +34,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             echo $this->Html->script('jquery');
             echo $this->Html->script('jquery.validate.min');
             
+            echo $this->Html->script('primeweb');
 	
             echo $this->Html->css('bootstrap.min');
             echo $this->Html->css('freelancer.css');
@@ -44,7 +45,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <?php echo $this->Html->script('primeweb'); ?>
+    
     
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
