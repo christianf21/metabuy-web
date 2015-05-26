@@ -60,6 +60,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <?php echo $this->element("navbar_system"); ?>
         </header>
 	<div id="wrapper-container">
+                <?php if($this->Session->check("notVerified")): ?>
+                    <div id="info_messages" class="alert" role="alert">
+                        <span style="color:rgb(255, 0, 39);font-weight: bold;">You need to verify your email address. Check your spam folder or <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"sendConfirmEmail")) ?>">Resend confirmation email.</a></span>
+                    </div>
+                <?php endif; ?>
+            
 		<?php echo $this->Session->flash(); ?>
 
                 <?php echo $this->fetch('content'); ?>

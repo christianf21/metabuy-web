@@ -62,4 +62,24 @@ class User extends AppModel{
             return false;
     }
     
+    public function verifyToken($token,$userId)
+    {
+        $parameters = array(
+                'recursive'=>-1,
+                'conditions'=>array(
+                        'User.id'=>$userId,
+                        'User.token'=>$token
+                )
+        );
+        
+        $res = $this->find("first",$parameters);
+        
+        if(isset($res['User']['id']))
+        {
+            return 1;
+        }
+        
+        return 0;
+    }
+    
 }
