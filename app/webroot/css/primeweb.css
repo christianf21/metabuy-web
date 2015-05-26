@@ -64,8 +64,10 @@ header .intro-text .skills {
 .username-nav
 {
     text-transform: none;
+    min-width:580px;
 }
 
 .nohover:hover{
     color: white!important;
+    cursor: default;
 }

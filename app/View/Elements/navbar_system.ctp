@@ -16,11 +16,12 @@
 
             <?php 
             
-                $menu = array(
-                        'dashboard'=>'',
-                        'botstore'=>'',
-                        'nikereleases'=>''
-                );
+                    $menu = array(
+                            'dashboard'=>'',
+                            'botstore'=>'',
+                            'nikereleases'=>'',
+                            'joinlogin'=>''
+                    );
             
                 
                     if(isset($menudashboard))
@@ -36,6 +37,11 @@
                     elseif(isset($menunikereleases))
                     {
                         $menu['nikereleases'] = 'menu-chosen';
+                    }
+                    
+                    elseif(isset($menujoinlogin))
+                    {
+                        $menu['joinlogin'] = 'menu-chosen';
                     }
             
             ?>
@@ -59,11 +65,17 @@
                     <li class='nohover'>
                         <a class="nohover"> |</a>
                     </li>
-                    <li class='nohover'>
-                        <?php if(!$this->Session->check('userloggedIn')): ?>
-                            <a class='nohover' href="javascript:void(0)">Welcome back, <span style='color:black;'><?php echo $this->Session->read('userName')?> christianf21</span></a>
-                        <?php endif; ?>
-                    </li>
+                    <?php if(!$this->Session->check("userLoggedIn")): ?>
+                        <li class='nohover'>
+                            <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"join")) ?>" class="<?php echo $menu['joinlogin'] ?>">Join / Login</a>
+                        </li>
+                    <?php else: ?>
+                        <li class='nohover'>
+                            <a href="<?php echo $this->Html->url(array("controller"=>"system","action"=>"dashboard")) ?>"
+                               class="">christianf21<?php echo $this->Session->read("userName"); ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

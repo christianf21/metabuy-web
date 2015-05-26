@@ -68,6 +68,8 @@ class UsersController extends AppController {
         $this->layout = "default_system";
         $flag = false;
         
+        $this->set("menujoinlogin","");
+        
         if($flag)
         {
             if(!empty($this->request->data))
