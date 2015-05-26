@@ -22,6 +22,12 @@ class StoreController extends AppController{
         
     }
     
+    public function checkoutBot()
+    {
+        
+    }
+    
+    
     public function botStore()
     {
         $this->layout = "default_system";
