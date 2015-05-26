@@ -7,7 +7,7 @@
 $(document).ready(function(){
     
    // $("#login-btn").modal();
-    $('#alert_messages').animate({opacity: 1.0}, 5000).fadeOut();
+    $('#alert_messages').animate({opacity: 1.0}, 6000).fadeOut();
     
     
     // Validator methods
@@ -94,6 +94,17 @@ $(document).ready(function(){
             "data[email]":{required:"Required",email: "Enter a valid email"},
             "data[password]":{required:"Required"},
             "data[confirm_password]":{required:"Required"}
+        }
+        
+    });
+    
+    $("#forgotAccountForm").validate({
+        
+        rules: {
+            "data[email]":{required:true,email:true}
+        },
+        messages: {
+            "data[email]":{required:"Required",email: "Enter a valid email"}
         }
         
     });

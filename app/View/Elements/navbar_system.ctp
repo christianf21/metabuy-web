@@ -72,7 +72,7 @@
                     <?php else: ?>
                         <li class='nohover'>
                             <a href="<?php echo $this->Html->url(array("controller"=>"system","action"=>"dashboard")) ?>"
-                               class="">christianf21<?php echo $this->Session->read("userName"); ?>
+                               class=""><?php echo $this->Session->read("userName"); ?>
                             </a>
                         </li>
                     <?php endif; ?>

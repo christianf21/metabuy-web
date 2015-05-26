@@ -91,3 +91,15 @@ header .intro-text .skills {
 .error{
     color:red;
 }
+
+#forgot-account-form
+{
+    max-width:600px;
+    text-align:center;
+}
+
+#forgot-account-form input
+{
+    max-width: 300px;
+    margin:0 auto;
+}

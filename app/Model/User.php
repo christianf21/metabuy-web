@@ -44,7 +44,10 @@ class User extends AppModel{
     {
         App::uses('Security', 'Utility'); 
         
+        $this->log("Veirifyin username = " . $username . " and pass = " . $password,"debug");
         $pass = Security::hash($password);
+        
+        $this->log("Encrypted pass = " . $pass,"debug");
         
         $parameters = array(
                 'recursive'=>-1,
@@ -56,10 +59,12 @@ class User extends AppModel{
         
         $res = $this->find("first",$parameters);
         
+        $this->log("Result from DB is = " . print_r($res,true),"debug");
+        
         if(isset($res['User']['id_user']))
             return $res['User']['id_user'];
         else
-            return false;
+            return -1;
     }
     
     public function verifyToken($token,$userId)
@@ -80,6 +85,18 @@ class User extends AppModel{
         }
         
         return 0;
+    }
+    
+    public function getUserByEmail($email)
+    {
+        $parameters = array(
+                'recursive'=>-1,
+                'conditions'=>array(
+                        'User.email'=>$email
+                )
+        );
+        
+        return $this->find("first",$parameters);
     }
     
 }

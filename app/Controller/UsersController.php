@@ -30,17 +30,14 @@ class UsersController extends AppController {
     
     public function login()
     {
-        $this->layout = "main";
-        $this->set("login","login");
+        $this->autoRender = false;
         
         if(!empty($this->request->data))
         {
             $data = $this->request->data;
-            $this->set("data",$data);
-            
             $res = $this->User->verifyCredentials($data['username'],$data['password']); 
            
-           if($res)
+           if($res > 0)
            {
                $this->__loginUser($res);
                $this->redirect(array("controller"=>"system","action"=>"dashboard"));
@@ -49,7 +46,7 @@ class UsersController extends AppController {
            {
                //wrong user or pass
                $this->Session->setFlash("Wrong username or password!","error");
-               $this->redirect(array("controller"=>"users","action"=>"login"));
+               $this->redirect(array("controller"=>"users","action"=>"join"));
            }
         }
         else
@@ -59,13 +56,58 @@ class UsersController extends AppController {
         }
     }
     
+    public function forgotAccount()
+    {
+        if(empty($this->request->data))
+        {
+            $this->layout = "default_system";
+        }
+        else // posted
+        {
+            $data = $this->request->data;
+            
+            $user = $this->User->getUserByEmail($data['email']);
+                
+                if($user['User']['id_user'] > 0)
+                {
+                    $this->__sendForgotAccountDetails($user);
+                    $this->Session->setFlash("Your Account details have been sent to your email address, follow the instructions in the email!","success");
+                }
+                else
+                {
+                    $this->Session->setFlash("There is no account associated with this email, you may want to register ;)","info");
+                }
+                
+            $this->redirect(array("controller"=>"users","action"=>"join"));
+        }
+    }
+    
+    /**
+     * Page where user is directed once he clicks the link on the email to Reset
+     * password. Will set a session so if the user changes location inside the site,
+     * will force to reset pass.
+     */
+    public function resetPassword()
+    {
+        
+    }
+    
+    /**
+     * Sends the username and the link to reset password.
+     */
+    private function __sendForgotAccountDetails($user)
+    {
+        
+    }
+    
     public function __loginUser($userId)
     {
         //logged in
-        $user = $this->User->getUser($res);
+        $user = $this->User->getUser($userId);
 
-        $this->Session->write("userloggedIn",true);
+        $this->Session->write("userLoggedIn",true);
         $this->Session->write("userName",$user['User']['username']);
+        $this->Session->write("userEmail",$user['User']['email']);
         $this->Session->write("firstName",$user['User']['first_name']);
         $this->Session->write("lastName",$user['User']['last_name']);
         $this->Session->write("userId",$user['User']['id_user']);
@@ -156,22 +198,16 @@ class UsersController extends AppController {
                     $this->redirect(array("controller"=>"home","action"=>"home"));
                 }
             }
-        }
-//        else
-//        {
-//            $this->Session->setFlash("Registering is not allowed.... Maybe some time soon...","error");
-//            $this->redirect(array("controller"=>"home","action"=>"home"));
-//        }
-                
+        } 
     }
     
     private function __sendConfirmationEmail($username,$email,$userId,$token)
     {
-        App::uses('CakeEmail', 'Network/Email');  
+        App::uses('CakeEmail', 'Network/Email');
         
         $email = new CakeEmail();
         $email->config('smtp');
-        $email->template('registerConfirmation');
+        $email->template('registerConfirmation',null);
         
         $email->emailFormat('html');
         $email->to($email);

@@ -7,6 +7,7 @@
             <li class="list-group-item normal-row active">My info</li>
             <li class="list-group-item normal-row">My bots</li>
             <li class="list-group-item normal-row">Customer Support</li>
+            <li class="list-group-item normal-row"><a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"logout")) ?>">Logout</a></li>
         </ul>
     </div>
 
@@ -21,11 +22,11 @@
                 <table class="table table-bordered" id="user-info-table">
                     <tr>
                         <td class="table-label-info">Username</td>
-                        <td>christianf21</td>
+                        <td><?php echo $this->Session->read("userName"); ?></td>
                     </tr>
                     <tr>
                         <td class="table-label-info">Email</td>
-                        <td>christianfeob@yahoo.com</td>
+                        <td><?php echo $this->Session->read("userEmail"); ?></td>
                     </tr>
                     <tr>
                         <td class="table-label-info">Name</td>
