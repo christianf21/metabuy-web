@@ -63,9 +63,9 @@ class UsersController extends AppController {
         }
     }
     
-    public function register()
+    public function join()
     {
-        $this->layout = "main_system";
+        $this->layout = "default_system";
         $flag = false;
         
         if($flag)
@@ -104,11 +104,11 @@ class UsersController extends AppController {
                 }
             }
         }
-        else
-        {
-            $this->Session->setFlash("Registering is not allowed.... Maybe some time soon...","error");
-            $this->redirect(array("controller"=>"home","action"=>"home"));
-        }
+//        else
+//        {
+//            $this->Session->setFlash("Registering is not allowed.... Maybe some time soon...","error");
+//            $this->redirect(array("controller"=>"home","action"=>"home"));
+//        }
                 
     }
     

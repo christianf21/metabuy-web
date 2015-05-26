@@ -30,12 +30,15 @@
                     <li class="page-scroll">
                         <a href="#howitworks">How It Works</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>">Join Now</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="<?php echo $this->base.'/system/dashboard' ?>">login</a>
-                    </li>
+                    <?php if(!$this->Session->check("userLoggedIn")): ?>
+                        <li class="page-scroll">
+                            <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"join")) ?>">Join Now / Login</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="page-scroll">
+                            <a href="<?php echo $this->Html->url(array("controller"=>"system","action"=>"dashboard")) ?>">Client Area</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
