@@ -141,6 +141,15 @@ class UsersController extends AppController {
         $this->Session->write("lastName",$user['User']['last_name']);
         $this->Session->write("userId",$user['User']['id_user']);
         $this->Session->write("userType",$user['User']['fk_user_type']);
+        
+        if($user['User']['token'] != 1)
+        {
+            if(!$this->Session->check("notVerified"))
+            {
+                $this->Session->write("notVerified",1);
+            }
+        }
+        
     }
     
     public function register()
