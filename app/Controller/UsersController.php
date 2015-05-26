@@ -42,16 +42,7 @@ class UsersController extends AppController {
            
            if($res)
            {
-               //logged in
-               $user = $this->User->getUser($res);
-               
-               $this->Session->write("userloggedIn",true);
-               $this->Session->write("userName",$user['User']['username']);
-               $this->Session->write("firstName",$user['User']['first_name']);
-               $this->Session->write("lastName",$user['User']['last_name']);
-               $this->Session->write("userId",$user['User']['id_user']);
-               $this->Session->write("userType",$user['User']['fk_user_type']);
-               
+               $this->__loginUser($res);
                $this->redirect(array("controller"=>"system","action"=>"dashboard"));
            }
            else
@@ -68,10 +59,25 @@ class UsersController extends AppController {
         }
     }
     
+    public function __loginUser($userId)
+    {
+        //logged in
+        $user = $this->User->getUser($res);
+
+        $this->Session->write("userloggedIn",true);
+        $this->Session->write("userName",$user['User']['username']);
+        $this->Session->write("firstName",$user['User']['first_name']);
+        $this->Session->write("lastName",$user['User']['last_name']);
+        $this->Session->write("userId",$user['User']['id_user']);
+        $this->Session->write("userType",$user['User']['fk_user_type']);
+    }
+    
     public function register()
     {
         if(!empty($this->request->data))
         {
+            App::uses('Security', 'Utility');
+            
             $data = $this->request->data;
             
             $token = str_replace(array('/','+','='),array('1','2','-'),base64_encode(openssl_random_pseudo_bytes(64)));
@@ -82,12 +88,13 @@ class UsersController extends AppController {
             $this->request->data['User']['password'] = Security::hash($data['password']);
             $this->request->data['User']['fk_user_type'] = 1; // 1: Client, 2: Admin
             $this->request->data['User']['token'] = $token;
+            $this->request->data['User']['created'] = date("d-m-Y H:i:s");
             
             if($this->User->save($this->request->data))
             {
                 $this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
                 
-                $this->Session->write("userLoggedIn",$this->User->id);
+                $this->__loginUser($this->User->id);
                 $this->Session->write("notVerified",1);
                 
                 $this->Session->setFlash("Finish your profile details below..","info");
@@ -184,7 +191,6 @@ class UsersController extends AppController {
         
         if(!empty($token) && !(empty($userId)))
         {
-            
             $res = $this->User->verifyToken($token,$userId);
             
             if($res == 1)
@@ -195,7 +201,7 @@ class UsersController extends AppController {
                 $this->request->data['User']['token'] = 1;
                 $this->User->save($this->request->data);
                 
-                $this->Session->setFlash("You succesfully verified you email address!","success");
+                $this->Session->setFlash("You succesfully verified your email address!","success");
                 $this->redirect(array("controller"=>"system","action"=>"dashboard"));
             }
             else
@@ -207,6 +213,7 @@ class UsersController extends AppController {
         }
         else
         {
+            $this->Session->setFlash("Nothing was supplied to verify the email account!","error");
             $this->redirect(array("controller"=>"users","action"=>"join"));
         }
     }
