@@ -103,3 +103,9 @@ header .intro-text .skills {
     max-width: 300px;
     margin:0 auto;
 }
+
+.normal-link
+{
+    color:blue !important;
+    cursor:pointer;
+}

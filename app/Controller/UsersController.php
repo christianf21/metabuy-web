@@ -82,6 +82,18 @@ class UsersController extends AppController {
         }
     }
     
+    public function editProfile()
+    {
+        if(empty($this->request->data))
+        {
+            $this->layout = "default_system";
+        }
+        else
+        {
+            
+        }
+    }
+    
     /**
      * Page where user is directed once he clicks the link on the email to Reset
      * password. Will set a session so if the user changes location inside the site,

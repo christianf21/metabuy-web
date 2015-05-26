@@ -1,4 +1,7 @@
 
+
+
+
     <div class="col-md-3" id="sidebar-dashboard">
         <ul class="list-group" style="color:black;text-align: center;">
             <li class="list-group-item normal-row active">My info</li>
@@ -12,7 +15,7 @@
         
         <div class="panel panel-default" id="user-info">
             <div class="panel-heading">
-              <h3 class="panel-title">account info</h3>
+              <h3 class="panel-title">edit account info</h3>
             </div>
             <div class="panel-body">
               
@@ -27,12 +30,8 @@
                     </tr>
                     <tr>
                         <td class="table-label-info">Name</td>
-                        <td>
-                            <a href="#" id="full-name" data-pk="1" data-title="Enter full name" data-type="text" data-url="/editProfile"><?php echo $user['User']['name'] . " " . $user['User']['last_name'] ?></a>
-                        
-                            <?php if(empty($user['User']['name'])): ?>
-                                <a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"editProfile")) ?>" class="normal-link">Edit your info</a>
-                            <?php endif; ?>
+                        <td class="form-group">
+                            <input type="text" name="data[name]" placeholder="Enter name and last name" >
                         </td>
                     </tr>
                     <tr>
@@ -54,38 +53,4 @@
             </div>
         </div>
         
-    </div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default" id="user-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Your Bot</h3>
-            </div>
-            <div class="panel-body">
-                <p>Information about the bot you own:</p>
-                <table class="table table-bordered" id="user-info-table">
-                    <tr>
-                        <td class="table-label-info">Package</td>
-                        <td>
-                            <?php echo $botPackage ?>
-                            
-                            <?php if(!$flagOwnsBot): ?>
-                                &nbsp;&nbsp;&nbsp;<a href="#" class="normal-link">Get Bots</a>
-                            <?php endif; ?>
-                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-label-info">Bot Version</td>
-                        <td><?php echo $botVersion ?></td>
-                    </tr>
-                    <tr>
-                        <td class="table-label-info">Current Version</td>
-                        <td></td>
-                    </tr>
-                </table>
-                <button type="button" class="btn btn-default">Update Bot</button>
-                <button type="button" class="btn btn-primary">Upgrade Package</button>
-            </div>
-        </div>
     </div>

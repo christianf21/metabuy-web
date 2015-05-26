@@ -9,6 +9,8 @@ $(document).ready(function(){
    // $("#login-btn").modal();
     $('#alert_messages').animate({opacity: 1.0}, 6000).fadeOut();
     
+    $.fn.editable.defaults.mode = 'inline';
+    $('a#first-name').editable();
     
     // Validator methods
     

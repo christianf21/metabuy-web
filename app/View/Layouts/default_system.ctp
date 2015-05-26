@@ -22,11 +22,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		PRIME Nike Bot - The best nikebot out there for an affordable price.
+		Prime NikeBot - We sell bots.
 	</title>
 	<?php
-		echo $this->Html->meta('icon');
-
+            echo $this->Html->meta('icon');
 
             echo $this->fetch('meta');
             echo $this->fetch('css');
@@ -34,17 +33,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             
             echo $this->Html->script('jquery');
             echo $this->Html->script('jquery.validate.min');
-            echo $this->Html->script('primeweb');
+            
 	
             echo $this->Html->css('bootstrap.min');
             echo $this->Html->css('freelancer.css');
             echo $this->Html->css('primeweb.css');
-            echo $this->Html->css('font-awesome/css/font-awesome.min.css');
+            echo $this->Html->css('font-awesome.min.css');
      ?>
         
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+    
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <?php echo $this->Html->script('primeweb'); ?>
+    
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>

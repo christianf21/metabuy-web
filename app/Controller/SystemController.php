@@ -15,7 +15,7 @@ class SystemController extends AppController{
     //put your code here
     
     public $name ='System';
-    public $uses= array('User');
+    public $uses= array('User','UserType');
     
     public function beforeFilter()
     {
@@ -31,6 +31,29 @@ class SystemController extends AppController{
        $this->layout = "default_system";
        
        $this->set("menudashboard","");
+       
+       
+       // Gather bot info - this is temporal while the bot system is done
+       $bot = array(); // $this->BotPackage->getPackagesByUser($userId);
+       
+        if(sizeof($bot < 1))
+        {
+            $botPackage = "None";
+        }
+        
+        $this->set("botPackage",$botPackage);
+        $this->set("botVersion","");
+        $this->set("flagOwnsBot",0);
+       
+       /*****************************************************************/ 
+       
+       // Client information
+       $user = $this->User->getUser($this->Session->read("userId"));
+       $user['User']['type_str'] = $this->UserType->getUserType($user['User']['fk_user_type']);
+        
+       $this->set("user",$user);
+       /*****************************************************************/
+       
     }
     
 }
