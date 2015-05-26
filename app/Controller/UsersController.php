@@ -87,10 +87,27 @@ class UsersController extends AppController {
         if(empty($this->request->data))
         {
             $this->layout = "default_system";
+            
+            $user = $this->User->getUser($this->Session->read("userId"));
+            $this->set("user",$user);
         }
         else
         {
+            $data = $this->request->data;
             
+            //updatear hits de ver mas banda
+               $this->User->read(null,$this->Session->read("userId"));
+               $this->User->set(array(
+                       'name'=>$data['name'],
+                       'last_name'=>$data['last_name']
+               ));
+            
+                if($this->User->save())
+                    $this->Session->setFlash("User info was updated!","success");
+                else
+                    $this->Session->setFlash("Coudln't update user info :(","error");
+            
+            $this->redirect(array("controller"=>"users","action"=>"editProfile"));
         }
     }
     
