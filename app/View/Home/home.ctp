@@ -14,7 +14,7 @@
                     <div class="intro-text">
                         <span class="name">All the best in one bot</span>
                         <hr class="star-light">
-                        <span class="skills">We're not the first, but we've been studying at how people use bots and gathered the best features, <br />
+                        <span class="skills">We're not the first, but we've been studying how people use bots and gathered the best features, <br />
                                             took out the unnecesesary ones, made it smarter and we grouped them all into one:<br /> easy to use, sleek looking, cross-platform and efficient bot.</span>
                     </div>
                 </div>
