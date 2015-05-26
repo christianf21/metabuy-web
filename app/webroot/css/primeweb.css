@@ -71,3 +71,23 @@ header .intro-text .skills {
     color: white!important;
     cursor: default;
 }
+
+#login-form-container
+{
+    text-align:center;
+}
+
+#register-wrapper
+{
+    margin-left: 50px;
+}
+
+#register-form
+{
+    max-width: 300px;
+    text-align: center;
+}
+
+.error{
+    color:red;
+}

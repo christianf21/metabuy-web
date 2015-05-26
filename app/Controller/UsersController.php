@@ -61,6 +61,11 @@ class UsersController extends AppController {
                $this->redirect(array("controller"=>"users","action"=>"login"));
            }
         }
+        else
+        {
+            $this->Session->setFlash("You need to supply your details to log in","error");
+            $this->redirect(array("controller"=>"users","action"=>"join"));
+        }
     }
     
     public function join()
