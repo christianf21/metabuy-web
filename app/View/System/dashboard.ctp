@@ -84,8 +84,13 @@
                         <td></td>
                     </tr>
                 </table>
-                <button type="button" class="btn btn-default">Update Bot</button>
-                <button type="button" class="btn btn-primary">Upgrade Package</button>
+                
+                <?php if($flagOwnsBot): ?>
+                    <button type="button" class="btn btn-default">Update Bot</button>
+                    <button type="button" class="btn btn-primary">Upgrade Package</button>
+                <?php else: ?>
+                    <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"botStore")) ?>" type="button" class="btn btn-primary">Bot Store</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
