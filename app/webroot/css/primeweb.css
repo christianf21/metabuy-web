@@ -109,3 +109,9 @@ header .intro-text .skills {
     color:blue !important;
     cursor:pointer;
 }
+
+#register-checkout-wrapper{
+    max-width:342px !important;
+    margin:0 auto;
+    float:none !important;
+}

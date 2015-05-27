@@ -36,5 +36,35 @@ class ShopingCart extends AppModel{
         return $this->find("all",$parameters);
     }
     
+    /**
+     * Checks if the shoping cart of the user already exists of the product he
+     * is trying to add, as to not have multiple of the same shoping cart per 
+     * user.
+     * 
+     * @param type $userId
+     * @param type $productId
+     */
+    public function shopingCartExists($userId, $productId)
+    {
+        $flag = false;
+        
+        $parameters = array(
+            'recursive'=>-1,
+            'conditions'=>array(
+                'ShopingCart.fk_user'=>$userId,
+                'ShopingCart.fk_product'=>$productId
+            )
+        );
+        
+        $res = $this->find("count",$parameters);
+        
+            if($res > 0)
+            {
+                $flag = true;
+            }
+        
+        return $flag;
+    }
+    
    
 }

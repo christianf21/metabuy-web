@@ -122,31 +122,7 @@
                     <hr class="star-light">
                 </div>
             </div>
-            
-            
-            <?php
-            
-                $offer = false;
-            
-                $price = array(
-                    'starter'=>95,
-                    'basic'=>125,
-                    'complete'=>150
-                );
-                
-                if($offer)
-                {
-                    $amount = 0.45;
-                    
-                    foreach($price as $index=>$p)
-                    {
-                        $new_price = $p - ($p * $amount);
-                        $price[$index] = $new_price;
-                    }
-                }
-                
-            
-            ?>
+         
             <div class="row">
                 
                 <div class="container-fluid" id="wrapper">
@@ -157,7 +133,7 @@
                         <div class="panel panel-default">
 
                             <div class="panel-heading package-head starter-prime" style="text-align: center;">
-                                Starter Prime
+                                <?php echo $bots[0]['Product']['title'] ?>
                                 <div class="package-info">
                                     One time payment
                                 </div>
@@ -165,7 +141,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $<?php echo $price['starter'] ?>
+                                    $<?php echo $bots[0]['Product']['price'] ?>
                                 </div>
                             </div>
 
@@ -194,7 +170,7 @@
                         <div class="panel panel-default">
 
                             <div class="panel-heading package-head" style="text-align: center;">
-                                Basic Prime
+                                <?php echo $bots[1]['Product']['title'] ?>
                                 <div class="package-info">
                                     One time payment
                                 </div>
@@ -202,7 +178,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $<?php echo $price['basic'] ?>
+                                    $<?php echo $bots[1]['Product']['price'] ?>
                                 </div>
                             </div>
 
@@ -229,7 +205,7 @@
                         <div class="panel panel-default">
 
                             <div class="panel-heading package-head complete-prime" style="text-align: center;">
-                                Complete Prime
+                               <?php echo $bots[2]['Product']['title'] ?>
                                 <div class="package-info">
                                     One time payment
                                 </div>
@@ -237,7 +213,7 @@
 
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
-                                    $<?php echo $price['complete'] ?>
+                                    $<?php echo $bots[2]['Product']['price'] ?>
                                 </div>
                             </div>
 
@@ -254,7 +230,9 @@
                             </ul>
                             <br />
                             <p style="text-align:center;">
-                                  <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                                  <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"requestPackage",2)) ?>" class="btn btn-primary" id="why-button">
+                                      Get Package
+                                  </a>
                             </p>
                         </div>
 

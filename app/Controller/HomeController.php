@@ -15,12 +15,15 @@ class HomeController extends AppController{
     //put your code here
     
     public $name ='Home';
-    public $uses= array('');
+    public $uses= array('Product');
     
     public function home()
     {
         $this->set("title","PRIME Nike Bot - The best nikebot out there, for an affordable price.");
         $this->layout = "default";
+        
+        $products = $this->Product->getProducts();
+        $this->set("bots",$products);
     }
     
 }

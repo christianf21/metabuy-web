@@ -53,7 +53,7 @@ class SystemController extends AppController{
         
        $this->set("user",$user);
        /*****************************************************************/
-       
+       $this->log("shoping cart session array = " . print_r($this->Session->read("shoping-cart"),true),"debug");
     }
     
 }

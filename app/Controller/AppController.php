@@ -31,4 +31,58 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    
+    
+    
+    // Adds to cart to the cart in a session
+    private function addToSessionCart($id)
+    {
+        $this->autoRender = false;
+        
+        // if session hasnt been created
+        if(!$this->Session->check("shoping-cart"))
+        {
+            $tmp = array(
+                'product'=>$id
+            );
+            
+            $this->Session->write("shoping-cart",$tmp);
+        }
+        else
+        {
+            $currentCart = $this->Session->read("shoping-cart");
+            
+                $toAdd = array(
+                    'product'=>$id
+                );
+
+            array_push($currentCart, $toAdd);
+            $this->Session->write("shoping-cart",$currentCart);
+        }
+    }
+    
+    private function addToCart($id)
+    {
+        $this->autoRender = false;
+        
+        $this->loadModel('Product');
+        $this->loadModel('ShopingCart');
+        
+        // Get the product info
+        $product = $this->Product->getProductInfo($id);
+        $userId = $this->Session->read("userId");
+        
+        // If the user doesnt have already a cart with the product, add it.
+        if(!$this->ShopingCart->shopingCartExists($userId,$id))
+        {
+            $this->ShopingCart->create();
+            $this->request->data['ShopingCart']['fk_user'] = $this->Session->read("userId");
+            $this->request->data['ShopingCart']['fk_product'] = $id;
+            $this->request->data['ShopingCart']['price'] = $product['Product']['price'];
+            $this->request->data['ShopingCart']['quantity'] = 1;
+            $this->request->data['ShopingCart']['created'] = date("d-m-Y H:i:s");
+            $this->ShopingCart->save($this->request->data);
+        }
+        
+    }
 }

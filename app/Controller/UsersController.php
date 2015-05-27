@@ -152,6 +152,39 @@ class UsersController extends AppController {
         
     }
     
+    public function registerCheckout()
+    {
+        if(empty($this->request->data))
+        {
+            $this->layout = "default_system";
+        }
+        else
+        {
+            $data = $this->request->data;
+            
+            
+            // Register user
+                App::uses('Security', 'Utility');
+            
+                $token = str_replace(array('/','+','='),array('1','2','-'),base64_encode(openssl_random_pseudo_bytes(64)));
+
+                $this->User->create();
+                $this->request->data['User']['username'] = $data['username'];
+                $this->request->data['User']['email'] = $data['email'];
+                $this->request->data['User']['password'] = Security::hash($data['password']);
+                $this->request->data['User']['fk_user_type'] = 1; // 1: Client, 2: Admin
+                $this->request->data['User']['token'] = $token;
+                $this->request->data['User']['created'] = date("d-m-Y H:i:s");
+                $this->User->save($this->request->data);
+                $this->__loginUser($this->User->id);
+                //$this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
+                
+            // Move the session shoping cart into a database shoping cart
+                $cart = $this->Session->read("shoping-cart");
+            
+        }
+    }
+    
     public function register()
     {
         if(!empty($this->request->data))
@@ -175,7 +208,6 @@ class UsersController extends AppController {
                 //$this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
                 
                 $this->__loginUser($this->User->id);
-                $this->Session->write("notVerified",1);
                 
                 $this->Session->setFlash("Almost done! We sent you a confirmation email, please go and verify your email :)","info");
                 $this->redirect(array("controller"=>"system","action"=>"dashboard"));
