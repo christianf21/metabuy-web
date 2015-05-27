@@ -1,5 +1,35 @@
 
+    <div class="col-md-3">
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+              <h3 class="panel-title">shopping cart</h3>
+            </div>
+            <div class="panel-body">
+                
+                <table>
+                    <tbody>
+                        <?php if(!empty($products)): ?>
+                            <?php foreach($products as $item): ?>
+                                <tr>
+                                    <td><?php echo $item['Product']['title'] ?></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green-price">$<?php echo $item['Product']['price'] ?></span></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                                <tr>
+                                    <td>Nothing in your shopping cart.</td>
+                                </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            
+            </div>
+            
+            
+        </div>
 
+
+    </div>
 
 
     <!-- HERE GOES REGISTER FORM -->

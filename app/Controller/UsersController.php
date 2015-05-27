@@ -15,7 +15,7 @@ class UsersController extends AppController {
     //put your code here
     
     public $name ="Users";
-    public $uses= array('User');
+    public $uses= array('User','Product');
     
     public function beforeFilter()
     {
@@ -84,30 +84,38 @@ class UsersController extends AppController {
     
     public function editProfile()
     {
-        if(empty($this->request->data))
+        if($this->Session->check("userLoggedIn"))
         {
-            $this->layout = "default_system";
-            
-            $user = $this->User->getUser($this->Session->read("userId"));
-            $this->set("user",$user);
+            if(empty($this->request->data))
+            {
+                $this->layout = "default_system";
+
+                $user = $this->User->getUser($this->Session->read("userId"));
+                $this->set("user",$user);
+            }
+            else
+            {
+                $data = $this->request->data;
+
+                //updatear hits de ver mas banda
+                   $this->User->read(null,$this->Session->read("userId"));
+                   $this->User->set(array(
+                           'name'=>$data['name'],
+                           'last_name'=>$data['last_name']
+                   ));
+
+                    if($this->User->save())
+                        $this->Session->setFlash("User info was updated!","success");
+                    else
+                        $this->Session->setFlash("Coudln't update user info :(","error");
+
+                $this->redirect(array("controller"=>"users","action"=>"editProfile"));
+            }
         }
         else
         {
-            $data = $this->request->data;
-            
-            //updatear hits de ver mas banda
-               $this->User->read(null,$this->Session->read("userId"));
-               $this->User->set(array(
-                       'name'=>$data['name'],
-                       'last_name'=>$data['last_name']
-               ));
-            
-                if($this->User->save())
-                    $this->Session->setFlash("User info was updated!","success");
-                else
-                    $this->Session->setFlash("Coudln't update user info :(","error");
-            
-            $this->redirect(array("controller"=>"users","action"=>"editProfile"));
+            $this->Session->setFlash("This action is not allowed","error");
+            $this->redirect(array("controller"=>"users","action"=>"join"));
         }
     }
     
@@ -157,11 +165,25 @@ class UsersController extends AppController {
         if(empty($this->request->data))
         {
             $this->layout = "default_system";
+            
+                $products = array();
+                $cart = $this->Session->read("shoping-cart");
+                
+                    foreach($cart as $index=>$item)
+                    {
+                        $id = $item['product'];
+
+                        $info = $this->Product->getProductInfo($id);
+                        array_push($products, $info);
+                    }
+            
+                $this->set("products",  $products);
+            
+            $this->log("Shoping cart = " . print_r($this->Session->read("shoping-cart"),true),"debug");
         }
         else
         {
             $data = $this->request->data;
-            
             
             // Register user
                 App::uses('Security', 'Utility');
@@ -179,9 +201,17 @@ class UsersController extends AppController {
                 $this->__loginUser($this->User->id);
                 //$this->__sendConfirmationEmail($data['username'], $data['email'],$this->User->id,$token);
                 
+                
             // Move the session shoping cart into a database shoping cart
                 $cart = $this->Session->read("shoping-cart");
-            
+                $this->Session->delete("shoping-cart");
+                
+                    foreach($cart as $item)
+                    {
+                        $this->addToCart($item['product']);
+                    }
+                    
+                $this->redirect(array("controller"=>"store","action"=>"checkout"));
         }
     }
     

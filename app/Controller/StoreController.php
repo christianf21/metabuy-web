@@ -33,7 +33,7 @@ class StoreController extends AppController{
             {
                 //proceed to checkout
                 $this->addToCart($id);
-                $this->checkoutBot();
+                $this->checkout();
             }
             else
             {
@@ -52,9 +52,13 @@ class StoreController extends AppController{
     
     
     
-    public function checkoutBot()
+    public function checkout()
     {
+        $this->layout = "default_system";
         
+        $userId = $this->Session->read("userId");
+        
+        $products = $this->ShopingCart->getCartByUser();
     }
     
     

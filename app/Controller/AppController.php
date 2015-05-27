@@ -35,7 +35,7 @@ class AppController extends Controller {
     
     
     // Adds to cart to the cart in a session
-    private function addToSessionCart($id)
+    public function addToSessionCart($id)
     {
         $this->autoRender = false;
         
@@ -61,7 +61,7 @@ class AppController extends Controller {
         }
     }
     
-    private function addToCart($id)
+    public function addToCart($id)
     {
         $this->autoRender = false;
         

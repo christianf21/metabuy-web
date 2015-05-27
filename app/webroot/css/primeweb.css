@@ -115,3 +115,8 @@ header .intro-text .skills {
     margin:0 auto;
     float:none !important;
 }
+
+.green-price
+{
+    color:green;
+}
