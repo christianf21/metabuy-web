@@ -19,7 +19,7 @@ class HomeController extends AppController{
     
     public function home()
     {
-        $this->set("title","PRIME Nike Bot - The best nikebot out there, for an affordable price.");
+        $this->set("title","Prime NikeBot - We make bots | Buy your shoes at Retail price");
         $this->layout = "default";
         
         $products = $this->Product->getProducts();
