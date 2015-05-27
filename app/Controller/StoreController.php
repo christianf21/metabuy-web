@@ -39,7 +39,7 @@ class StoreController extends AppController{
             {
                 //proceed to registerCheckout
                 $this->addToSessionCart($id);
-                $this->redirect(array("controller"=>"users","action"=>"registerCheckout"));
+                $this->redirect(array("controller"=>"users","action"=>"join"));
             }
             
         }
@@ -69,7 +69,7 @@ class StoreController extends AppController{
         
     }
     
-    public function removeCartItem($itemId)
+    public function removeCartItem($itemId,$location)
     {
         $this->autoRender = false;
         
@@ -95,16 +95,25 @@ class StoreController extends AppController{
                         }
                     }
                 
-                if($indexRemove != -1)
+                    if($indexRemove != -1)
+                    {
+                        unset($cart[$index]);
+                    }
+                
+                if(sizeof($cart) <= 0)
                 {
-                    unset($cart[$index]);
+                    $this->Session->delete("shoping-cart");
+                }
+                else
+                {
+                    $this->Session->write("shoping-cart",$cart);
                 }
                 
-                $this->Session->write("shoping-cart",$cart);
+                $this->log("after DEL Cart contents = " . print_r($cart,true),"debug");
             }
             
             $this->Session->setFlash("Item was deleted from shopping cart!","success");
-            $this->redirect(array("controller"=>"users","action"=>"registerCheckout"));
+            $this->redirect(array("controller"=>"users","action"=>$location));
         }
         else
         {

@@ -79,7 +79,7 @@ header .intro-text .skills {
 
 #register-wrapper
 {
-    margin-left: 50px;
+    /*margin-left: 50px;*/
 }
 
 #register-form
@@ -129,4 +129,10 @@ tr.spaceAround > td
 .delete-cart-item{
     cursor:pointer;
     font-size: 12px;
+}
+
+form#registerForm
+{
+    max-width: 300px;
+    margin:0 auto;
 }

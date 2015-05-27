@@ -21,12 +21,24 @@
     </div>
 
     <!-- HERE GOES REGISTER FORM -->
-    <div class="col-md-5" id="register-wrapper">
+    <div class="col-md-6" id="register-wrapper">
         
             <form method="POST" action="<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>" id="registerForm">
         
                 <div class="form-group" id="register-form">
-                    <h4>Register now!</h4>
+                    <?php 
+                        
+                        $title = "Register now!";
+                    
+                        if(!empty($products))
+                        {
+                            $title = "Register and Continue to Checkout";
+                        }
+                    
+                    ?>
+                    
+                    
+                    <h4><?php echo $title; ?></h4>
                     <?php //echo $this->Form->input('', array('type'=>'text','name'=>'data[first_name]','class'=>'form-control','id'=>'first_name', 'placeholder'=>'Name')); ?>
 
                     <?php //echo $this->Form->input('', array('type'=>'text','name'=>'data[last_name]','class'=>'form-control','id'=>'last_name', 'placeholder'=>'Last Name')); ?>
@@ -39,7 +51,19 @@
 
                     <?php echo $this->Form->input('', array('type'=>'password','name'=>'data[confirm_password]','class'=>'form-control','id'=>'confirm_password', 'placeholder'=>'Confirm Password')); ?>
                     <br />
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    
+                    <?php
+                    
+                        $buttonTitle = "Register";
+                        
+                        if(!empty($products))
+                        {
+                            $buttonTitle = "Register and Continue";
+                        }
+                    
+                    ?>
+                    
+                    <button type="submit" class="btn btn-primary"><?php echo $buttonTitle ?></button>
 
                 </div>
 
@@ -61,15 +85,15 @@
                                 <tr class="spaceAround">
                                     <td><?php echo $item['Product']['title'] ?></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green-price">$<?php echo $item['Product']['price'] ?></span></td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"removeCartItem",$item['Product']['id'])) ?>">
+                                        <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"removeCartItem",$item['Product']['id'],"join")) ?>">
                                             <span class="glyphicon glyphicon-trash delete-cart-item"></span>
                                         </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
-                                <tr>
-                                    <td>Nothing in your shopping cart.</td>
+                                <tr style="text-align: center;">
+                                    <td>Nothing in your shopping cart. <br /><br /> <a class="normal-link" href="<?php echo $this->base."/#packages" ?>">View Bot Packages</a></td>
                                 </tr>
                         <?php endif; ?>
                     </tbody>
