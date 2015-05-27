@@ -69,4 +69,47 @@ class StoreController extends AppController{
         
     }
     
+    public function removeCartItem($itemId)
+    {
+        $this->autoRender = false;
+        
+        if($this->Session->check("shoping-cart"))
+        {
+            $cart = $this->Session->read("shoping-cart");
+            
+            if(sizeof($cart) <= 1)
+            {
+                $nothing = array();
+                $this->Session->write("shoping-cart",$nothing);
+            }
+            else
+            {
+                $indexRemove = -1;
+                
+                    foreach($cart as $index=>$item)
+                    {
+                        if($item['product'] == $itemId)
+                        {
+                            $indexRemove = $index;
+                            break;
+                        }
+                    }
+                
+                if($indexRemove != -1)
+                {
+                    unset($cart[$index]);
+                }
+                
+                $this->Session->write("shoping-cart",$cart);
+            }
+            
+            $this->Session->setFlash("Item was deleted from shopping cart!","success");
+            $this->redirect(array("controller"=>"users","action"=>"registerCheckout"));
+        }
+        else
+        {
+            // Logic to delete a record of the table ShopingCart
+        }
+    }
+    
 }

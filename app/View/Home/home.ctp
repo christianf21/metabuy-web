@@ -155,7 +155,7 @@
                             </ul>
                             <br />
                             <p style="text-align:center;">
-                                  <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                                  <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"requestPackage",1)) ?>" class="btn btn-primary" id="why-button">Get Package</a>
                             </p>
                         </div>
 
@@ -193,7 +193,7 @@
                             </ul>
                             <br />
                             <p style="text-align:center;">
-                                  <a href="#" class="btn btn-primary" id="why-button">Get Package</a>
+                                  <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"requestPackage",2)) ?>" class="btn btn-primary" id="why-button">Get Package</a>
                             </p>
                         </div>
 
@@ -230,7 +230,7 @@
                             </ul>
                             <br />
                             <p style="text-align:center;">
-                                  <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"requestPackage",2)) ?>" class="btn btn-primary" id="why-button">
+                                  <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"requestPackage",3)) ?>" class="btn btn-primary" id="why-button">
                                       Get Package
                                   </a>
                             </p>

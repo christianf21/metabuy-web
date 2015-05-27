@@ -259,12 +259,23 @@ class UsersController extends AppController {
     public function join()
     {
         $this->layout = "default_system";
-        $flag = false;
+        $flag = true;
         
         $this->set("menujoinlogin","");
         
-        if($flag)
-        {
+        $products = array();
+        $cart = $this->Session->read("shoping-cart");
+
+            foreach($cart as $index=>$item)
+            {
+                $id = $item['product'];
+
+                $info = $this->Product->getProductInfo($id);
+                array_push($products, $info);
+            }
+
+        $this->set("products",  $products);
+        
             if(!empty($this->request->data))
             {
                 if(!$this->Session->check("userloggedIn"))
@@ -298,7 +309,6 @@ class UsersController extends AppController {
                     $this->redirect(array("controller"=>"home","action"=>"home"));
                 }
             }
-        } 
     }
     
     private function __sendConfirmationEmail($username,$email,$userId,$token)

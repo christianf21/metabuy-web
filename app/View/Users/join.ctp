@@ -21,7 +21,7 @@
     </div>
 
     <!-- HERE GOES REGISTER FORM -->
-    <div class="col-md-4" id="register-wrapper">
+    <div class="col-md-5" id="register-wrapper">
         
             <form method="POST" action="<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>" id="registerForm">
         
@@ -47,6 +47,36 @@
             
     </div>
     
-    <div class="col-md-4 well" >
-        <p>Text, graphics, etc about why you should join</p>
+    <div class="col-md-3" >
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+              <h3 class="panel-title">shopping cart</h3>
+            </div>
+            <div class="panel-body">
+                
+                <table>
+                    <tbody>
+                        <?php if(!empty($products)): ?>
+                            <?php foreach($products as $item): ?>
+                                <tr class="spaceAround">
+                                    <td><?php echo $item['Product']['title'] ?></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green-price">$<?php echo $item['Product']['price'] ?></span></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"removeCartItem",$item['Product']['id'])) ?>">
+                                            <span class="glyphicon glyphicon-trash delete-cart-item"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                                <tr>
+                                    <td>Nothing in your shopping cart.</td>
+                                </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            
+            </div>
+            
+            
+        </div>
     </div>

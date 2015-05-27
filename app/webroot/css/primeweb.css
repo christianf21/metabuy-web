@@ -120,3 +120,13 @@ header .intro-text .skills {
 {
     color:green;
 }
+tr.spaceAround > td
+{
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+.delete-cart-item{
+    cursor:pointer;
+    font-size: 12px;
+}

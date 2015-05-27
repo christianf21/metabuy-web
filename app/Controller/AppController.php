@@ -52,12 +52,41 @@ class AppController extends Controller {
         {
             $currentCart = $this->Session->read("shoping-cart");
             
-                $toAdd = array(
-                    'product'=>$id
-                );
+            // check if item doesnt already exist in cart, it not, then add it
+                $flagExists = false;
+                $itemToadd = $id;
 
-            array_push($currentCart, $toAdd);
-            $this->Session->write("shoping-cart",$currentCart);
+                foreach($currentCart as $item)
+                {
+                    if($item['product'] == $itemToadd)
+                    {
+                        $flagExists = true;
+                        break;
+                    }
+                }
+            
+            if(!$flagExists)
+            {
+                $newCart = array();
+
+                // add the old items
+                foreach($currentCart as $item)
+                {
+                    $tmp = array(
+                        'product'=>$item['product']
+                    );
+
+                    array_push($newCart, $tmp);
+                }
+
+                    // prepare new item to be added
+                    $toAdd = array(
+                        'product'=>$id
+                    );
+
+                array_push($newCart, $toAdd);
+                $this->Session->write("shoping-cart",$newCart);
+            }
         }
     }
     
