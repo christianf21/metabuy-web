@@ -75,6 +75,7 @@ header .intro-text .skills {
 #login-form-container
 {
     text-align:center;
+    background-color: rgba(0, 148, 213, 0.08) !important;
 }
 
 #register-wrapper
