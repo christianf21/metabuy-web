@@ -15,7 +15,7 @@ class SystemController extends AppController{
     //put your code here
     
     public $name ='System';
-    public $uses= array('User','UserType');
+    public $uses= array('User','UserType','ShopingCart','Product');
     
     public function beforeFilter()
     {
@@ -29,7 +29,6 @@ class SystemController extends AppController{
     public function dashboard()
     {
        $this->layout = "default_system";
-       
        $this->set("menudashboard","");
        
        
@@ -53,7 +52,23 @@ class SystemController extends AppController{
         
        $this->set("user",$user);
        /*****************************************************************/
-       $this->log("shoping cart session array = " . print_r($this->Session->read("shoping-cart"),true),"debug");
+       
+       $products = array();
+       $cart = $this->ShopingCart->getCartByUser($this->Session->read("userId"));
+                
+        if(!empty($cart))
+            foreach($cart as $item)
+            {
+                $id = $item['ShopingCart']['fk_product'];
+
+                $info = $this->Product->getProductInfo($id);
+                array_push($products, $info);
+            }
+        $this->log("System products = " . print_r($products,true),"debug");        
+        $this->set("products",$products);
+       
     }
+    
+    
     
 }

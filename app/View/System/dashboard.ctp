@@ -6,6 +6,11 @@
             <li class="list-group-item normal-row">Customer Support</li>
             <li class="list-group-item normal-row"><a href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"logout")) ?>">Logout</a></li>
         </ul>
+        
+        <div>
+            <?php echo $this->element("shopping_cart"); ?>
+        </div>
+        
     </div>
 
     <div class="col-md-5">

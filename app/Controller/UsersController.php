@@ -263,18 +263,17 @@ class UsersController extends AppController {
         
         $this->set("menujoinlogin","");
         
-        $products = array();
-        $cart = $this->Session->read("shoping-cart");
+                $products = array();
+                $cart = $this->Session->read("shoping-cart");
+                foreach($cart as $item)
+                {
+                    $id = $item['product'];
 
-            foreach($cart as $index=>$item)
-            {
-                $id = $item['product'];
+                    $info = $this->Product->getProductInfo($id);
+                    array_push($products, $info);
+                }
 
-                $info = $this->Product->getProductInfo($id);
-                array_push($products, $info);
-            }
-
-        $this->set("products",  $products);
+                $this->set("products",  $products);
         
             if(!empty($this->request->data))
             {

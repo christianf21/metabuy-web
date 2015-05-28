@@ -19,9 +19,9 @@ class ShopingCart extends AppModel{
     public $primaryKey='id';
     
     /**
-     *  Gets the name of the type of User
+     *  Gets the cart items of user
      * @param type $id
-     * @return type String
+     * @return type array
      */
     public function getCartByUser($id)
     {
@@ -33,7 +33,9 @@ class ShopingCart extends AppModel{
                 
         );
         
-        return $this->find("all",$parameters);
+        $res = $this->find("all",$parameters);
+        
+        return $res;
     }
     
     /**

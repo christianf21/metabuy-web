@@ -129,10 +129,29 @@ tr.spaceAround > td
 .delete-cart-item{
     cursor:pointer;
     font-size: 12px;
+    margin-bottom: 5px;
+    float: right;
 }
 
 form#registerForm
 {
     max-width: 300px;
     margin:0 auto;
+}
+
+.cart-bot-icon
+{
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.cart-product-title
+{
+    font-weight: bold;
+}
+
+#shopping-cart-wrapper{
+    font-size:13px;
+    text-align:center;
 }

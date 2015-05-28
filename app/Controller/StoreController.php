@@ -33,7 +33,7 @@ class StoreController extends AppController{
             {
                 //proceed to checkout
                 $this->addToCart($id);
-                $this->checkout();
+                $this->redirect(array("controller"=>"system","action"=>"dashboard"));
             }
             else
             {

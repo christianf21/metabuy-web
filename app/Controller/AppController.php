@@ -114,4 +114,47 @@ class AppController extends Controller {
         }
         
     }
+    
+    public function getCartProducts()
+    {
+        $this->autoRender = false;
+        
+        $this->log("Inside getCartProducts()","debug");
+        
+        $this->loadModel('ShopingCart');
+        $this->loadModel('Product');
+        
+        $products = array();
+        $this->log("Before ifs","debug");
+        
+            if($this->Session->check("shoping-cart"))
+            {
+                $cart = $this->Session->read("shoping-cart");
+
+                foreach($cart as $item)
+                {
+                    $id = $item['product'];
+
+                    $info = $this->Product->getProductInfo($id);
+                    array_push($products, $info);
+                }
+            }
+            else
+            {
+                $cart = $this->ShopingCart->getCartByUser($this->Session->read("userId"));
+                
+                if(!empty($cart))
+                    foreach($cart as $item)
+                    {
+                        $id = $item['ShopingCart']['fk_product'];
+
+                        $info = $this->Product->getProductInfo($id);
+                        array_push($products, $info);
+                    }
+            }
+            
+            $this->log("After ifs","debug");
+            
+        return $products;
+    }
 }
