@@ -259,55 +259,61 @@ class UsersController extends AppController {
     public function join()
     {
         $this->layout = "default_system";
-        $flag = true;
         
-        $this->set("menujoinlogin","");
-        
-                $products = array();
-                $cart = $this->Session->read("shoping-cart");
-                foreach($cart as $item)
-                {
-                    $id = $item['product'];
+        if(!$this->Session->check("userLoggedIn"))
+        {
+            $this->set("menujoinlogin","");
 
-                    $info = $this->Product->getProductInfo($id);
-                    array_push($products, $info);
-                }
-
-                $this->set("products",  $products);
-        
-            if(!empty($this->request->data))
-            {
-                if(!$this->Session->check("userloggedIn"))
-                {
-                    App::uses('Security', 'Utility'); 
-
-                    $data = $this->request->data;
-
-                    $this->User->create();
-                    $this->request->data['User']['username'] = $data['username'];
-                    $this->request->data['User']['email'] = $data['email'];
-                    $this->request->data['User']['password'] = Security::hash($data['password']);
-                    $this->request->data['User']['name'] = $data['first_name'];
-                    $this->request->data['User']['last_name'] = $data['last_name'];
-                    $this->request->data['User']['created'] = date("d-m-Y H:i a");
-
-                    if($this->User->save($this->request->data))
+                    $products = array();
+                    $cart = $this->Session->read("shoping-cart");
+                    foreach($cart as $item)
                     {
-                        $this->Session->setFlash("User Registered Succesfully!","success");
-                        $this->redirect(array("controller"=>"home","action"=>"home"));
+                        $id = $item['product'];
+
+                        $info = $this->Product->getProductInfo($id);
+                        array_push($products, $info);
+                    }
+
+                    $this->set("products",  $products);
+
+                if(!empty($this->request->data))
+                {
+                    if(!$this->Session->check("userloggedIn"))
+                    {
+                        App::uses('Security', 'Utility'); 
+
+                        $data = $this->request->data;
+
+                        $this->User->create();
+                        $this->request->data['User']['username'] = $data['username'];
+                        $this->request->data['User']['email'] = $data['email'];
+                        $this->request->data['User']['password'] = Security::hash($data['password']);
+                        $this->request->data['User']['name'] = $data['first_name'];
+                        $this->request->data['User']['last_name'] = $data['last_name'];
+                        $this->request->data['User']['created'] = date("d-m-Y H:i a");
+
+                        if($this->User->save($this->request->data))
+                        {
+                            $this->Session->setFlash("User Registered Succesfully!","success");
+                            $this->redirect(array("controller"=>"home","action"=>"home"));
+                        }
+                        else
+                        {
+                            $this->Session->setFlash("User Could NOT be registered!","error");
+                            $this->redirect(array("controller"=>"home","action"=>"home"));
+                        }
                     }
                     else
                     {
-                        $this->Session->setFlash("User Could NOT be registered!","error");
+                        $this->Session->setFlash("You already have an account!","error");
                         $this->redirect(array("controller"=>"home","action"=>"home"));
                     }
                 }
-                else
-                {
-                    $this->Session->setFlash("You already have an account!","error");
-                    $this->redirect(array("controller"=>"home","action"=>"home"));
-                }
-            }
+        }
+        else
+        {
+            $this->redirect(array("controller"=>"system","action"=>"dashboard"));
+        }
     }
     
     private function __sendConfirmationEmail($username,$email,$userId,$token)

@@ -118,6 +118,14 @@ class StoreController extends AppController{
         else
         {
             // Logic to delete a record of the table ShopingCart
+            if($this->Session->check("userLoggedIn"))
+            {
+                $cartId = $this->ShopingCart->getCartId($itemId,$this->Session->read("userId"));
+                $this->ShopingCart->delete($cartId);
+                
+                $this->Session->setFlash("Item was deleted from shopping cart!","success");
+                $this->redirect(array("controller"=>"system","action"=>"dashboard"));
+            }
         }
     }
     

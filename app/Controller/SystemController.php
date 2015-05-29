@@ -64,7 +64,8 @@ class SystemController extends AppController{
                 $info = $this->Product->getProductInfo($id);
                 array_push($products, $info);
             }
-        $this->log("System products = " . print_r($products,true),"debug");        
+            
+            
         $this->set("products",$products);
        
     }

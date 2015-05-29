@@ -56,9 +56,9 @@
                     <li>
                         <a href="<?php echo $this->Html->url(array("controller"=>"system","action"=>"dashboard")) ?>" class="<?php echo $menu['dashboard'] ?>">Dashboard</a>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="javascript:void(0)" class="<?php echo $menu['botstore'] ?>">Bot Store</a>
-                    </li>
+                    </li-->
                     <li>
                         <a href="javascript:void(0)" class="<?php echo $menu['nikereleases'] ?>">Nike Releases</a>
                     </li>

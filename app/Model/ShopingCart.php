@@ -18,6 +18,22 @@ class ShopingCart extends AppModel{
     public $useTable='shoping_cart';
     public $primaryKey='id';
     
+    public function getCartId($itemId,$userId)
+    {
+        $parameters = array(
+                'recursive'=>-1,
+                'conditions'=>array(
+                    'ShopingCart.fk_user'=>$userId,
+                    'ShopingCart.fk_product'=>$itemId
+                )
+                
+        );
+        
+        $res = $this->find("first",$parameters);
+        
+        return $res['ShopingCart']['id'];
+    }
+    
     /**
      *  Gets the cart items of user
      * @param type $id
