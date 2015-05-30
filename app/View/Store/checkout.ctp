@@ -56,14 +56,14 @@
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="" for="email">Email Address <span class='red'>*</span></label>
-                                <input id="email" name="email" type="text" placeholder="Email Address" class="form-control input-xlarge" required="">
+                                <input id="email" value="<?php echo $user['User']['email'] ?>" name="email" type="text" placeholder="Email Address" class="form-control input-xlarge" required="">
                                
                             </div>
 
                             <!-- Text input-->
                             <div class="form-group">
                               <label class="" for="firstname">Name <span class='red'>*</span></label>
-                                <input id="firstname" name="firstname" type="text" placeholder="First Name" class="form-control input-xlarge" required="">
+                                <input value="<?php echo $user['User']['name'] ?>" id="firstname" name="firstname" type="text" placeholder="First Name" class="form-control input-xlarge" required="">
                               
                             </div>
 
@@ -71,7 +71,7 @@
                             <div class="form-group">
                               <label class="" for="lastname">Last Name <span class='red'>*</span></label>
                               
-                                <input id="lastname" name="lastname" type="text" placeholder="Last Name" class="form-control input-xlarge" required="">
+                                <input id="lastname" value="<?php echo $user['User']['last_name'] ?>" name="lastname" type="text" placeholder="Last Name" class="form-control input-xlarge" required="">
                                 
                             </div>
 

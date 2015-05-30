@@ -134,10 +134,10 @@ tr.spaceAround > td
     float: right;
 }
 
-form#registerForm
+#registerForm
 {
-    max-width: 300px;
-    margin:0 auto;
+    max-width: 300px !important;
+    margin:0 auto !important;
 }
 
 .cart-bot-icon

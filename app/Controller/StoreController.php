@@ -59,6 +59,9 @@ class StoreController extends AppController{
         $this->set("title", "Checkout - Prime NikeBot");
         
         $userId = $this->Session->read("userId");
+        
+        $this->set("user",  $this->User->getUser($userId));
+        
         $products = $this->ShopingCart->getCartByUser();
     }
     
