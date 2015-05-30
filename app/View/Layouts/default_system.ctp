@@ -22,7 +22,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		Prime NikeBot - We sell bots.
+	    <?php if(!isset($title)): ?>
+                Prime NikeBot - We sell bots.
+            <?php else: ?>
+                <?php echo $title; ?>
+            <?php endif; ?>
 	</title>
 	<?php
             echo $this->Html->meta('icon');

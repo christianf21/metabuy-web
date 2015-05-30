@@ -23,7 +23,7 @@
     <!-- HERE GOES REGISTER FORM -->
     <div class="col-md-6" id="register-wrapper">
         
-            <form method="POST" action="<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>" id="registerForm">
+            <form method="POST" action='<?php echo $this->Html->url(array("controller"=>"users","action"=>"register")) ?>" id="registerForm'>
         
                 <div class="form-group" id="register-form">
                     <?php 

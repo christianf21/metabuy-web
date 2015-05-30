@@ -156,3 +156,65 @@ form#registerForm
     font-size:13px;
     text-align:center;
 }
+
+#checkout-products-info
+{
+    width:80%;
+    margin:0 auto;
+}
+
+.center-text
+{
+    text-align:center;
+}
+
+.checkout-items
+{
+    padding:25px !important;
+}
+
+#checkout-total-price
+{
+    margin-left:2%;
+    margin-right:6%;
+    color:green;
+}
+
+.input-container
+{
+      border: 1px solid #ecf0f1;
+      min-height: 50px;
+      width: 80%;
+      margin-top: 5%;
+}
+
+#payment-method-wrap
+{
+      border: 1px solid #ecf0f1;
+      min-height: 100px;
+      width: 80%;
+      margin-top: 5%;
+}
+
+#payment-method
+{
+    margin-left: 20px;
+    margin-top: 20px;   
+}
+
+.checkout-title
+{
+    font-weight:  normal !important;
+    text-transform: none !important;
+    color: #0088C3;
+}
+
+#checkout-personal-info-wrap{
+    width:65%;
+    margin:0 auto;
+}
+
+.red
+{
+    color:red;
+}
