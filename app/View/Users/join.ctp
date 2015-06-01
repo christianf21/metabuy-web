@@ -4,7 +4,7 @@
     <!-- HERE GOES LOGIN FORM -->
     <div class="col-md-3  well" id="login-form-container">
        
-        <form method="POST" action="<?php echo $this->Html->url(array("controller"=>"users","action"=>"login")) ?>" id="loginForm">
+        <form method="POST" action='<?php echo $this->Html->url(array("controller"=>"users","action"=>"login")) ?>' id="loginForm">
             
             <p>Already have an account?</p>
             <div class="form-group">
@@ -12,7 +12,7 @@
 
                 <?php echo $this->Form->input('', array('type'=>'password','name'=>'data[password]','class'=>'form-control','id'=>'password', 'placeholder'=>'Password')); ?>
                 <br />
-                <a style="color:blue;" href="<?php echo $this->Html->url(array("controller"=>"users","action"=>"forgotAccount")) ?>">Forgot my username or password</a>
+                <a style="color:blue;" href='<?php echo $this->Html->url(array("controller"=>"users","action"=>"forgotAccount")) ?>'>Forgot my username or password</a>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
             

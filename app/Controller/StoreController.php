@@ -65,6 +65,19 @@ class StoreController extends AppController{
         $products = $this->ShopingCart->getCartByUser();
     }
     
+    public function checkoutComplete()
+    {
+        $this->layout = "default_system";
+        $this->set("title", "Order summary - Prime NikeBot");
+        
+        // Paypal identity token
+        $identityToken = 'nAn02b7dN7UlDzpv1kSBcjPxt8B8bloWJfyZS-cIjEG-6tDQ39E9CWx6r4K';
+        
+        if(isset($_GET['tx']))
+        {
+            
+        }
+    }
     
     public function botStore()
     {

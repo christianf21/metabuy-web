@@ -152,6 +152,12 @@ tr.spaceAround > td
     font-weight: bold;
 }
 
+#terms-check
+{
+    margin-right: 15px;
+    cursor: pointer;
+}
+
 #shopping-cart-wrapper{
     font-size:13px;
     text-align:center;
@@ -217,4 +223,15 @@ tr.spaceAround > td
 .red
 {
     color:red;
+}
+
+.negrita{
+    font-weight: bold !important;
+}
+
+#checkout-button-wrap{
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    margin:0 auto;
 }

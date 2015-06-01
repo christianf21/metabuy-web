@@ -3,7 +3,7 @@
         
         <div class="panel panel-default" id="checkout-wrapper">
             <div class="panel-heading">
-              <h3 class="panel-title">checkout</h3>
+              <h3 class="panel-title">order #1283 summary</h3>
             </div>
             <div class="panel-body">
               
@@ -47,51 +47,7 @@
                         
                 </div>
                 
-                <div class='container-fluid input-container'>
-                    <h4 class="checkout-title">Your Details</h4>
-                    <br />  
-                    
-                    <div id="checkout-personal-info-wrap">
-                        <fieldset>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="" for="email">Email Address <span class='red'>*</span></label>
-                                <input id="email" value="<?php echo $user['User']['email'] ?>" name="email" type="text" placeholder="Email Address" class="form-control input-xlarge" required="">
-                               
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                              <label class="" for="firstname">Name <span class='red'>*</span></label>
-                                <input value="<?php echo $user['User']['name'] ?>" id="firstname" name="firstname" type="text" placeholder="First Name" class="form-control input-xlarge" required="">
-                              
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                              <label class="" for="lastname">Last Name <span class='red'>*</span></label>
-                              
-                                <input id="lastname" value="<?php echo $user['User']['last_name'] ?>" name="lastname" type="text" placeholder="Last Name" class="form-control input-xlarge" required="">
-                                
-                            </div>
-
-                        </fieldset>
-                    </div>
-
-                </div>
-                
-                <div class='container-fluid input-container'>
-                    <h4 class="checkout-title">Terms</h4>
-                    <input type="checkbox" id="terms-check"><span class='negrita'>I certify that I have read and agree to the terms.</span>
-                    <div id="checkout-button-wrap">
-                        <!--a href="<?php echo $this->Html->url(array('controller'=>'store','action'=>'checkoutComplete')) ?>" class="btn btn-success">Complete Checkout</a-->
-                        <?php echo $this->element("buybutton-basic"); ?>
-                    </div>
-                </div>
-                
-                
-                
+               
                 
                 
                 
