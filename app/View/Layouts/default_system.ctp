@@ -37,12 +37,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             
             echo $this->Html->script('jquery');
             echo $this->Html->script('jquery.validate.min');
+            echo $this->Html->script('angular.min');
             
             echo $this->Html->script('alertify.min');
             echo $this->Html->script('alertify');
             
                 echo $this->Html->script('primeweb');
                 echo $this->Html->script('jsValidation');
+                
                 echo $this->Html->css('alertify.core');
                 echo $this->Html->css('alertify.bootstrap');
             
