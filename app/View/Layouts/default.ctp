@@ -37,6 +37,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
      
             echo $this->Html->css('bootstrap.min');
             echo $this->Html->css('freelancer.css');
+            echo $this->Html->css('primeweb');
             echo $this->Html->css('font-awesome/css/font-awesome.min.css');
          ?>
     

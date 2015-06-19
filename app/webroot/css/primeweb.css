@@ -235,3 +235,27 @@ tr.spaceAround > td
     padding: 20px;
     margin:0 auto;
 }
+
+ul.howitworks
+{
+      margin-top: 30px;
+}
+
+ul.howitworks li 
+{
+  margin-bottom: 27px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+ul.smaller-howitworks li
+{
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.blue
+{
+    color:#0094D5;;
+}

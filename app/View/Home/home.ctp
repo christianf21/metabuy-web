@@ -260,21 +260,29 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-5">
+                    <img src="<?php echo $this->base."/img/screenshot1.png" ?>">
+                </div>
+                <div class="col-lg-7">
+                    <p>The PrimeBot is a <b>Chrome Extension</b>, and its very simple to use: </p>
+                    
+                    <ul class="howitworks">
+                        <li>You write the shoe size you want.</li>
+                        <li>Supply as many keywords you want.</li>
+                        <li>Write down the twitter username to scan.</li>
+                        <li>or You can also give the link for early link finders.</li>
+                        <li>All you need to do now is either Start Scan:</li>
+                            <ul class="smaller-howitworks">
+                                <li>Will check twitter username every .98ms <span class="blue">*complete package owners can modify this delay</span> </li>
+                                <li>If tweet meets keywords, will open link and add to cart. <span class="blue">*complete package owners can modify keyword threshold</span></li>
+                            </ul>
+                        <li>or if you have an early link, copy it under "Link:" and it will process it.</li>
+                    </ul>
+                    
+                    <p><b>Thats it!</b> You also have a log that will show you what's happening behind the scenes, as well as if any updates are available so you'll always be up-to-date.</p>
+                </div>
                 <div class="col-lg-2">
                     
-                </div>
-                <div class="col-lg-8">
-                    <p>Nike releases are very limited, and the only way to buy them at retail price is to own a Bot. </p>
-                    <p>Bots are little programs that automate the process of buying in a webstore. This means, they can buy an item from a store
-                        in a matter of millisenconds, compared to the time it takes for a real person to click on the item > choose size > add to cart > clicks the cart > goes to checkout > etc...</p>
-                    <p>All our bots automatically scan twitter for the release link, but if you have an Early Link (which happens often as well), then we have that
-                    option enabled too.</p>
-                    <p>Some bots use Twitter API to scan, we use a different method and have proven to be more succesfull, and this frees us of twitter request limits.</p>
-                    <p>So stop missing out on releases and <a class="page-scroll" style="color:blue;" href="#packages">get a bot</a> that will save you money, this is a must have for all Sneaker heads.</p>
-                </div>
-                <div class="col-lg-2">
-                    <p>All our bots automatically scan twitter for the release link, but if you have an Early Link (which happens often as well), then we have that
-                    option enabled too.</p>
                 </div>
             </div>
         </div>
@@ -290,22 +298,12 @@
                        <p>Got any questions? Drop us a line at <a href="mailto:contact@primenikebot.com">contact@primenikebot.com</a></p>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3></h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                        </ul>
+                        <h3>Tweet Us</h3>
+                        <p>@PrimeNikeBot</p>
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>About Us</h3>
-                        <p>We're a group of full-time Software Developers who love Sneakers and didn't like any of the current bots.<br /> So we made our own.</p>
+                        <p>We're a group of full-time Software Developers who love Sneakers and wanted to build a more powerfull and easy-to-use bot.<br /> So we made our own.</p>
                     </div>
                 </div>
             </div>
