@@ -146,4 +146,60 @@ class StoreController extends AppController{
         }
     }
     
+    
+    public function getCartProducts()
+    {
+        $this->layout='ajax';
+        $this->autoRender = false;
+        
+//        $this->loadModel('ShopingCart');
+//        $this->loadModel('Product');
+        
+        $products = array();
+        
+            if($this->Session->check("shoping-cart"))
+            {
+                $cart = $this->Session->read("shoping-cart");
+
+                foreach($cart as $item)
+                {
+                    $id = $item['product'];
+
+                    $info = $this->Product->getProductInfo($id);
+                    array_push($products, $info);
+                }
+            }
+            else
+            {
+                $cart = $this->ShopingCart->getCartByUser($this->Session->read("userId"));
+                
+                if(!empty($cart))
+                    foreach($cart as $item)
+                    {
+                        $id = $item['ShopingCart']['fk_product'];
+
+                        $info = $this->Product->getProductInfo($id);
+                        array_push($products, $info);
+                    }
+            }
+         
+        // Preparing JSON data 
+            $data = array();
+            foreach($products as $item)
+            {
+                $tmp = array(
+                    'title'=>$item['Product']['title'],
+                    'price'=>$item['Product']['price'],
+                    'quantity'=>1,
+                    'url'=>$this->base."/img/".$item['Product']['route'],
+                    'id'=>$item['Product']['id']
+                );
+
+                array_push($data, $tmp);
+            }
+            
+             
+        echo json_encode(array("products"=>$data));
+    }
+    
 }

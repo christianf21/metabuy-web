@@ -1,16 +1,16 @@
-<div class="panel panel-default" id="shopping-cart-wrapper" ng-controller="CartController as cart">
+<div class="panel panel-default" id="shopping-cart-wrapper" ng-controller="CartController as cart" >
     
     <div class="panel-heading">
         <h3 class="panel-title">shopping cart</h3>
     </div>
     
     <div class="panel-body">  
-        <table >
+        <table style="margin:0 auto;">
             <tbody>
                 
                     <!-- CART ITEMS -->
                 
-                        <tr class="spaceAround" ng-repeat="item in cart.products" ng-show="cart.products">
+                    <tr class="spaceAround" ng-repeat="item in cart.products" ng-show="cart.products.length">
                             
                             <td><img class="cart-bot-icon" ng-src="{{item.icon}}" ></td>
                             <td class="cart-product-title">{{item.title}}</td>
@@ -21,7 +21,7 @@
                                 </a>
                             </td>
                             
-                        </tr>
+                    </tr>
                         
                     <!-- EMPTY CART -->
              

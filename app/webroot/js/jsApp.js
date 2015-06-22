@@ -1,40 +1,29 @@
 (function(){
     
     var app = angular.module("system", []);
-    
     var base = "http://localhost/nikebot/web";
     
-    app.controller("CartController", function(){
-        
-        this.products = [
-            {
-                title: "Un Producto",
-                price: 2.95,
-                quantity: 1,
-                icon: base+"/img/icon-complete.png"
-            },
-            {
-                title: "Otro Producto",
-                price: 7.95,
-                quantity: 4,
-                icon: base+"/img/icon-basic.png"
-            },
-            {
-                title: "Cuanto mas Producto",
-                price: 7.95,
-                quantity: 4,
-                icon: base+"/img/icon-basic.png"
-            }
-        ];
-        
+    app.controller("CartController", [ '$http', function($http){
+      
+      this.products = [];
+      
+        $http.get( base + '/store/getCartProducts').
+            success(function(data,status,headers,config){
+                this.products = data.products;
+                console.log("success: " + JSON.stringify(data));
+            }).
+            error(function(data,status,headers,config){
+                console.log("error: " + data);
+            });
+      
         this.remove = function(item){
             var id = item.id;
-            var index = this.products.indexOf(item);
+            var index = $scope.products.indexOf(item);
             
             this.products.splice(index,1);
         };
         
         
-    });
+    }]);
     
 })();
