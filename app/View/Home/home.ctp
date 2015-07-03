@@ -143,6 +143,7 @@
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
                                     $<?php echo $bots[0]['Product']['price'] ?>
+                                    <span class="price-decimal"><?php echo $bots[0]['Product']['decimal'] ?></span>
                                 </div>
                             </div>
 
@@ -180,6 +181,7 @@
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
                                     $<?php echo $bots[1]['Product']['price'] ?>
+                                    <span class="price-decimal"><?php echo $bots[1]['Product']['decimal'] ?></span>
                                 </div>
                             </div>
 
@@ -215,6 +217,7 @@
                             <div class="panel-body" style="color:black;">
                                 <div class="package-price">
                                     $<?php echo $bots[2]['Product']['price'] ?>
+                                    <span class="price-decimal"><?php echo $bots[2]['Product']['decimal'] ?></span>
                                 </div>
                             </div>
 

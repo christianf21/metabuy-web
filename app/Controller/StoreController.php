@@ -67,10 +67,7 @@ class StoreController extends AppController{
             
             if(!empty($products) && sizeof($products)>0 )
             {
-                
-                
-                
-                
+                // process checkout
             }
             else
             {

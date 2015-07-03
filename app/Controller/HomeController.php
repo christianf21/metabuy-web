@@ -23,6 +23,17 @@ class HomeController extends AppController{
         $this->layout = "default";
         
         $products = $this->Product->getProducts();
+        
+        foreach($products as $index=>$item)
+        {
+            $tmp = explode(".", $item['Product']['price']);
+            
+            $products[$index]['Product']['price'] = $tmp[0];
+            $products[$index]['Product']['decimal'] = ".".$tmp[1];
+        }
+        
+        $this->log("Products = " . print_r($products,true),"debug");
+        
         $this->set("bots",$products);
     }
     
