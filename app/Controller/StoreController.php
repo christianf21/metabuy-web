@@ -25,18 +25,20 @@ class StoreController extends AppController{
     public function requestPackage($id = null)
     {
         $this->autoRender = false;
-        
+        $this->log("Requesting package id = " . $id,"debug");
         if($id != null)
         {
             
             if($this->Session->check("userLoggedIn"))
             {
+                $this->log("Logged in...add to db","debug");
                 //proceed to checkout
                 $this->addToCart($id);
                 $this->redirect(array("controller"=>"system","action"=>"dashboard"));
             }
             else
             {
+                $this->log("Guest...add to session","debug");
                 //proceed to registerCheckout
                 $this->addToSessionCart($id);
                 $this->redirect(array("controller"=>"users","action"=>"join"));
@@ -96,9 +98,8 @@ class StoreController extends AppController{
         
         $itemId = $request->productid;
         
-        if($this->Session->check("shoping-cart"))
+        if($this->Session->check("shoping-cart") && !$this->Session->check("userLoggedIn"))
         {
-            $this->log("Has session cart","debug");
             $cart = $this->Session->read("shoping-cart");
             
             if(sizeof($cart) <= 1)
@@ -127,25 +128,14 @@ class StoreController extends AppController{
                 else
                     $this->Session->write("shoping-cart",$cart);
             }
-            
         }
         else
         {
-            $this->log("Doesnt have session car..","debug");
             // Logic to delete a record of the table ShopingCart
             if($this->Session->check("userLoggedIn"))
             {
-                $this->log("User is logged in..","debug");
                 $cartId = $this->ShopingCart->getCartId($itemId,$this->Session->read("userId"));
-                $this->log("Cart ID = " . $cartId,"debug");
-                if($this->ShopingCart->delete($cartId))
-                {
-                    $this->log("succesfully deleted","debug");
-                }
-                else
-                {
-                    $this->log("couldnt delete cart item","debug");
-                }
+                $this->ShopingCart->delete($cartId);
             }
         }
     }
@@ -156,10 +146,9 @@ class StoreController extends AppController{
         $this->layout='ajax';
         $this->autoRender = false;
         
-        
         $products = array();
         
-            if($this->Session->check("shoping-cart"))
+            if($this->Session->check("shoping-cart") && !$this->Session->check("userId"))
             {
                 $cart = $this->Session->read("shoping-cart");
 
@@ -171,10 +160,9 @@ class StoreController extends AppController{
                     array_push($products, $info);
                 }
             }
-            else
+            else if($this->Session->check("userId"))
             {
                 $cart = $this->ShopingCart->getCartByUser($this->Session->read("userId"));
-                
                 if(!empty($cart))
                     foreach($cart as $item)
                     {

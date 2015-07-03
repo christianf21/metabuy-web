@@ -12,7 +12,7 @@
                     
                     <tr class="spaceAround" ng-repeat="item in cart.products" ng-show="cart.products.length">
                             
-                            <td><img class="cart-bot-icon" ng-src="{{item.icon}}" ></td>
+                            <td><img class="cart-bot-icon" ng-src="{{item.url}}" ></td>
                             <td class="cart-product-title">{{item.title}}</td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green-price">{{item.price | currency}}</span></td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

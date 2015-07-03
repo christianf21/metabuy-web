@@ -29,6 +29,7 @@
             success(function(data,status,headers,config){
                 vm.products =  data.products;
                 console.log("loaded!");
+                console.log("data = " + JSON.stringify(data));
             }).
             error(function(data,status,headers,config){
                 console.log("error: " + data);

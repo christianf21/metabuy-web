@@ -50,7 +50,7 @@
                             <?php echo $botPackage; ?>
                         
                             <?php if(!$flagOwnsBot): ?>
-                                &nbsp;&nbsp;&nbsp;<a href="#" class="normal-link">Get Bots</a>
+                                &nbsp;&nbsp;&nbsp;<a href='<?php echo $this->base."/#packages" ?>' class="normal-link">Get Bots</a>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -75,7 +75,7 @@
                             <?php echo $botPackage ?>
                             
                             <?php if(!$flagOwnsBot): ?>
-                                &nbsp;&nbsp;&nbsp;<a href="#" class="normal-link">Get Bots</a>
+                                &nbsp;&nbsp;&nbsp;<a href='<?php echo $this->base."/#packages" ?>' class="normal-link">Get Bots</a>
                             <?php endif; ?>
                         
                         </td>
