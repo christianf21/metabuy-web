@@ -5,22 +5,42 @@
     
     app.controller("CartController", [ '$http', function($http){
       
-      this.products = [];
+//        this.products = [
+//            {
+//                title: "test prod",
+//                price: 2.95,
+//                quantity:1
+//            },
+//            {
+//                title: "please work",
+//                price: 98.99,
+//                quantity: 1
+//            }
+//        ];
+
+        var vm = this;
       
-        $http.get( base + '/store/getCartProducts').
+        vm.products = [];
+      
+        this.loadProducts = function(){
+            console.log("loading products...");
+            
+            $http.get( base + '/store/getCartProducts').
             success(function(data,status,headers,config){
-                this.products = data.products;
-                console.log("success: " + JSON.stringify(data));
+                vm.products =  data.products;
+                console.log("success: " + this.products[0].title);
             }).
             error(function(data,status,headers,config){
                 console.log("error: " + data);
             });
+            
+        };
       
         this.remove = function(item){
             var id = item.id;
-            var index = $scope.products.indexOf(item);
+            var index = vm.products.indexOf(item);
             
-            this.products.splice(index,1);
+            vm.products.splice(index,1);
         };
         
         

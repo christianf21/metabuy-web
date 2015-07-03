@@ -188,11 +188,11 @@ class StoreController extends AppController{
             foreach($products as $item)
             {
                 $tmp = array(
-                    'title'=>$item['Product']['title'],
-                    'price'=>$item['Product']['price'],
-                    'quantity'=>1,
-                    'url'=>$this->base."/img/".$item['Product']['route'],
-                    'id'=>$item['Product']['id']
+                    "title"=>$item['Product']['title'],
+                    "price"=>$item['Product']['price'],
+                    "quantity"=>1,
+                    "url"=>$this->base."/img/".$item['Product']['route'],
+                    "id"=>$item['Product']['id']
                 );
 
                 array_push($data, $tmp);

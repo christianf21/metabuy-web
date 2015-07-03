@@ -5,11 +5,11 @@
     </div>
     
     <div class="panel-body">  
-        <table style="margin:0 auto;">
+        <table style="margin:0 auto;" ng-init="cart.loadProducts()">
             <tbody>
                 
                     <!-- CART ITEMS -->
-                
+                    
                     <tr class="spaceAround" ng-repeat="item in cart.products" ng-show="cart.products.length">
                             
                             <td><img class="cart-bot-icon" ng-src="{{item.icon}}" ></td>
