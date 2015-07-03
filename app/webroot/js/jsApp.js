@@ -25,10 +25,10 @@
         this.loadProducts = function(){
             console.log("loading products...");
             
-            $http.get( base + '/store/getCartProducts').
+            $http.get( base+'/store/getCartProducts').
             success(function(data,status,headers,config){
                 vm.products =  data.products;
-                console.log("success: " + this.products[0].title);
+                console.log("loaded!");
             }).
             error(function(data,status,headers,config){
                 console.log("error: " + data);
@@ -41,6 +41,15 @@
             var index = vm.products.indexOf(item);
             
             vm.products.splice(index,1);
+            
+            $http.post( base+'/store/removeCartItem',{productid:id}).
+            success(function(data,status,headers,config){
+                console.log("success deletion of cart item");
+            }).
+            error(function(data,status,headers,config){
+                console.log("error: " + data);
+            });
+            
         };
         
         

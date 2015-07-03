@@ -86,12 +86,19 @@ class StoreController extends AppController{
         
     }
     
-    public function removeCartItem($itemId,$location)
+    public function removeCartItem()
     {
+        $this->layout='ajax';
         $this->autoRender = false;
+        
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        
+        $itemId = $request->productid;
         
         if($this->Session->check("shoping-cart"))
         {
+            $this->log("Has session cart","debug");
             $cart = $this->Session->read("shoping-cart");
             
             if(sizeof($cart) <= 1)
@@ -113,35 +120,32 @@ class StoreController extends AppController{
                     }
                 
                     if($indexRemove != -1)
-                    {
                         unset($cart[$index]);
-                    }
                 
                 if(sizeof($cart) <= 0)
-                {
                     $this->Session->delete("shoping-cart");
-                }
                 else
-                {
                     $this->Session->write("shoping-cart",$cart);
-                }
-                
-                $this->log("after DEL Cart contents = " . print_r($cart,true),"debug");
             }
             
-            $this->Session->setFlash("Item was deleted from shopping cart!","success");
-            $this->redirect(array("controller"=>"users","action"=>$location));
         }
         else
         {
+            $this->log("Doesnt have session car..","debug");
             // Logic to delete a record of the table ShopingCart
             if($this->Session->check("userLoggedIn"))
             {
+                $this->log("User is logged in..","debug");
                 $cartId = $this->ShopingCart->getCartId($itemId,$this->Session->read("userId"));
-                $this->ShopingCart->delete($cartId);
-                
-                $this->Session->setFlash("Item was deleted from shopping cart!","success");
-                $this->redirect(array("controller"=>"system","action"=>"dashboard"));
+                $this->log("Cart ID = " . $cartId,"debug");
+                if($this->ShopingCart->delete($cartId))
+                {
+                    $this->log("succesfully deleted","debug");
+                }
+                else
+                {
+                    $this->log("couldnt delete cart item","debug");
+                }
             }
         }
     }
@@ -152,8 +156,6 @@ class StoreController extends AppController{
         $this->layout='ajax';
         $this->autoRender = false;
         
-//        $this->loadModel('ShopingCart');
-//        $this->loadModel('Product');
         
         $products = array();
         
