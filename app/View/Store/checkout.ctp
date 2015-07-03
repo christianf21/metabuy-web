@@ -14,7 +14,7 @@
                         <td class="table-label-info">Price</td>
                     </tr>
                     
-                    <tr ng-repeat="product in checkout.products" style="font-weight:normal;" >
+                    <tr ng-show="checkout.products.length" ng-repeat="product in checkout.products" style="font-weight:normal;" >
                         <td class="checkout-items">
                             {{product.title}} - NikeBot
                             <span style='float: right;'>
@@ -25,10 +25,17 @@
                         <td class="center-text checkout-items">{{product.price | currency}}</td>
                     </tr>
                     
-                    <tr>
+                    <tr ng-show="checkout.products.length">
                         <td style="text-align:right;font-weight: bold;" colspan=3>
                             TOTAL<span id="checkout-total-price">{{checkout.total | currency}}</span>
                         </td>
+                    </tr>
+                    
+                    <tr ng-hide="checkout.products.length">
+                        <td colspan="3" style="text-align:center;">
+                            You need to add products!<br /><br />
+                            <a href="<?php echo $this->base."/#packages" ?>" class="btn btn-info">View Bot Packages</a>
+                        </td> 
                     </tr>
                 </table>
                 

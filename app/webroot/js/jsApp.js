@@ -47,9 +47,7 @@
             $http.get( base+'/store/getCartProducts').
             success(function(data,status,headers,config){
                 vm.products =  data.products;
-                $.each(vm.products, function(i, item) {
-                    vm.total += parseFloat(vm.products[i].price);
-                });
+                updateTotal();
             }).
             error(function(data,status,headers,config){
                 console.log("error: " + data);
@@ -65,11 +63,20 @@
             $http.post( base+'/store/removeCartItem',{productid:id}).
             success(function(data,status,headers,config){
                 console.log("success deleting checkout product");
+                updateTotal();
             }).
             error(function(data,status,headers,config){
                 console.log("error: " + data);
             });
         };
+        
+        function updateTotal()
+        {
+            vm.total = 0;
+            $.each(vm.products, function(i, item) {
+                    vm.total += parseFloat(vm.products[i].price);
+            });
+        }
         
     }]); // FIN checkout controller
     
