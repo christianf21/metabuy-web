@@ -1,11 +1,11 @@
 
-    <div class="col-md-12">
+    <div class="col-md-12" ng-controller="CheckoutController as checkout">
         
         <div class="panel panel-default" id="checkout-wrapper">
             <div class="panel-heading">
               <h3 class="panel-title">checkout</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" ng-init="checkout.loadProducts()">
               
                 <table class="table table-bordered" id="checkout-products-info">
                     <tr style="font-weight: bold;">
@@ -13,20 +13,21 @@
                         <td class="table-label-info">Quantity</td>
                         <td class="table-label-info">Price</td>
                     </tr>
-                    <tr style="font-weight:normal;" >
+                    
+                    <tr ng-repeat="product in checkout.products" style="font-weight:normal;" >
                         <td class="checkout-items">
-                            Complete Prime - NikeBot
+                            {{product.title}} - NikeBot
                             <span style='float: right;'>
-                                <a href='#' class="normal-link">remove</a>
+                                <a href ng-click="checkout.remove(product)" class="normal-link">remove</a>
                             </span>
                         </td>
-                        <td class="center-text checkout-items">1</td>
-                        <td class="center-text checkout-items">129$</td>
+                        <td class="center-text checkout-items">{{product.quantity}}</td>
+                        <td class="center-text checkout-items">{{product.price | currency}}</td>
                     </tr>
                     
                     <tr>
                         <td style="text-align:right;font-weight: bold;" colspan=3>
-                            TOTAL<span id="checkout-total-price">129$</span>
+                            TOTAL<span id="checkout-total-price">{{checkout.total | currency}}</span>
                         </td>
                     </tr>
                 </table>
@@ -40,7 +41,7 @@
                             
                             <input  type='radio' name="payment-method" checked="checked"> &nbsp;&nbsp;&nbsp;
                             <label for="payment-method"></label>
-                            <img style='max-width:76px;' src='<?php echo $this->base."/img/paypal.png" ?>' >
+                            <img style='max-width:76px;' src='<?php echo $this->base."/img/paypal-logo.png" ?>' >
                             <!-- PayPal Logo --><!--table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" border="0" alt="PayPal Logo"></a></td></tr></table><!-- PayPal Logo -->
                             
                         </div>

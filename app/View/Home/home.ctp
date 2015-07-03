@@ -106,6 +106,7 @@
                               <p style="text-align:center;">
                                   <a href="#packages" class="btn btn-primary" id="why-button">Show Me Bot Packages</a>
                               </p>
+                              <p style="text-align:center;"><img style="max-width:250px;" src="<?php echo $this->base."/img/accepted-payments.png" ?>"></p>
                             </div>
                         </div>
                 </div>
@@ -279,7 +280,8 @@
                         <li>or if you have an early link, copy it under "Link:" and it will process it.</li>
                     </ul>
                     
-                    <p><b>Thats it!</b> You also have a log that will show you what's happening behind the scenes, as well as if any updates are available so you'll always be up-to-date.</p>
+                    <p><b>Thats it!</b> You also have a log that will show you what's happening behind the scenes, as well as if any updates are available so you'll always be up-to-date. So go and <a style="color:blue;" href="#packages">browse our packages</a>!</p>
+                    <p></p>
                 </div>
                 <div class="col-lg-2">
                     

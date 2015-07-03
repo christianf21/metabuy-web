@@ -81,7 +81,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="table-label-info">Bot Version</td>
+                        <td class="table-label-info">Your Version</td>
                         <td><?php echo $botVersion ?></td>
                     </tr>
                     <tr>

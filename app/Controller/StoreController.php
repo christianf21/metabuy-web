@@ -57,14 +57,33 @@ class StoreController extends AppController{
     public function checkout()
     {
         $this->layout = "default_system";
-        
         $this->set("title", "Checkout - Prime NikeBot");
         
-        $userId = $this->Session->read("userId");
-        
-        $this->set("user",  $this->User->getUser($userId));
-        
-        $products = $this->ShopingCart->getCartByUser();
+        if($this->Session->check("userLoggedIn"))
+        {
+            $userId = $this->Session->read("userId");
+            $this->set("user",  $this->User->getUser($userId));
+            $products = $this->ShopingCart->getCartByUser($userId);
+            
+            if(!empty($products) && sizeof($products)>0 )
+            {
+                
+                
+                
+                
+            }
+            else
+            {
+                $this->Session->setFlash("You have nothing in your shopping cart","error");
+                $this->redirect(array("controller"=>"users","action"=>"join"));
+            }
+        }
+        else
+        {
+            $this->Session->setFlash("You need to register first!","error");
+            $this->redirect(array("controller"=>"users","action"=>"join"));
+        }
+            
     }
     
     public function checkoutComplete()

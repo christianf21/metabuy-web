@@ -44,7 +44,8 @@
                             </td>
                         </tr>
                     </table>
-                
+                    
+                    <a href="<?php echo $this->base."/system/dashboard" ?>" class="btn btn-info">Go Back</a>
                     <button class="btn btn-default">Update info</button>
                 </form>
             </div>
