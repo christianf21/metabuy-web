@@ -80,24 +80,28 @@ class StoreController extends AppController{
         $token = $_REQUEST['token'];
         $payerID = $_REQUEST['PayerID'];
         
-        $this->log("Inside orderConfirmation()","debug");
-        
-        $this->Paypal = new Paypal(array(
-            'sandboxMode' => true,
-            'nvpUsername' => 'christianfeob_api1.yahoo.com',
-            'nvpPassword' => '6NMRPNQU2A47KB52',
-            'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
-        ));
-        
         try {
+            
+            $this->Paypal = new Paypal(array(
+                'sandboxMode' => true,
+                'nvpUsername' => 'christianfeob_api1.yahoo.com',
+                'nvpPassword' => '6NMRPNQU2A47KB52',
+                'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
+            ));
+        
             $details = $this->Paypal->getExpressCheckoutDetails($token);
+            
         } catch (Exception $e) {
-            $this->log("Catching an error...","debug");
             $this->log("Paypal Error: " . $e->getMessage(),"debug");
         }      
         
         $this->set("info",$details);
         $this->log("OrderConfirmation() details = " . print_r($details,true),"debug");
+    }
+    
+    public function orderComplete()
+    {
+        
     }
     
     public function orderCancelled($token)
