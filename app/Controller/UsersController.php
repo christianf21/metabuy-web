@@ -158,6 +158,15 @@ class UsersController extends AppController {
             }
         }
         
+        // Add session shopping cart to db cart if it exists
+        if($this->Session->check("shoping-cart"))
+        {
+            $cart = $this->Session->read("shoping-cart");
+
+            foreach($cart as $item)
+                $this->addToCart($item['product']);
+        }
+        
     }
     
     public function registerCheckout()

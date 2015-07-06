@@ -483,7 +483,7 @@ footer .footer-below {
 }
 
 .features-table td{
-    vertical-align: bottom;
+    vertical-align: middle !important;
 }
 
 .features-table tr{

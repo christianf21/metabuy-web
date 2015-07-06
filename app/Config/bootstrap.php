@@ -112,3 +112,6 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+// Load the paypal plugin
+CakePlugin::load('Paypal');

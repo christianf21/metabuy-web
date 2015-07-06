@@ -93,8 +93,7 @@
                     <h4 class="checkout-title">Terms</h4>
                     <input type="checkbox" id="terms-check"><span class='negrita'>I certify that I have read and agree to the terms.</span>
                     <div id="checkout-button-wrap">
-                        <!--a href="<?php echo $this->Html->url(array('controller'=>'store','action'=>'checkoutComplete')) ?>" class="btn btn-success">Complete Checkout</a-->
-                        <?php echo $this->element("buybutton-basic"); ?>
+                        <a href="<?php echo $this->Html->url(array('controller'=>'store','action'=>'processCheckout')) ?>" class="btn btn-success">Process Checkout</a>
                     </div>
                 </div>
                 

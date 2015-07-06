@@ -22,10 +22,83 @@ class StoreController extends AppController{
         
     }
     
+    private function initPaypalCredentials()
+    {
+        $this->autoRender = false;
+        App::uses('Paypal', 'Paypal.Lib');
+        
+        $this->log("Initiating paypal credentials instance","debug");
+
+        $this->Paypal = new Paypal(array(
+            'sandboxMode' => true,
+            'nvpUsername' => 'christianfeob_api1.yahoo.com',
+            'nvpPassword' => '6NMRPNQU2A47KB52',
+            'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
+        ));
+    }
+    
+    private function createOrder()
+    {
+        $this->autoRender = false;
+        
+        $this->log("Creating order for Paypal","debug");
+        
+        $order = array(
+            'description'=>'Your purchase with Prime NikeBots store',
+            'currency'=>'USD',
+            'return'=>$this->base.'/store/orderConfirmation',
+            'cancel'=>$this->base.'/store/orderCancelled',
+            'custom'=>'Software',
+            'shipping'=>'0.0',
+            'items'=>array(
+                0 => array(
+                    'name'=>'Complete PrimeBot',
+                    'description'=>'Complete Package of the Prime NikeBot Chrome Extension.',
+                    'tax'=>0,
+                    'subtotal'=>129.99,
+                    'qty'=>1
+                )
+            )
+        );
+        
+        try {
+            $this->log("The order parameters = " . print_r($order,true),"debug");
+            $this->log("About to setExpressCheckout(order)...","debug");
+            $this->Paypal->setExpressCheckout($order);
+        }
+        catch(Exception $e){
+            $this->log("Error: " . $e->getMessage(),"debug");
+        }
+    }
+    
+    public function orderConfirmation($token)
+    {
+        $this->layout = "ajax";
+        $details = null;
+        
+        $this->log("Inside orderConfirmation","debug");
+        
+        try {
+            $details = $this->Paypal->getExpressCheckoutDetails($token);
+        } catch (Exception $e) {
+            $this->log("Paypal Error: " . $e->getMessage(),"debug");
+        }      
+        
+        $this->log("OrderConfirmation() details = " . print_r($details,true),"debug");
+    }
+    
+    public function orderCancelled($token)
+    {
+        $this->layout = "ajax";
+        
+        $this->log("Order Cancelled :(","debug");
+    }
+    
+    
     public function requestPackage($id = null)
     {
         $this->autoRender = false;
-        $this->log("Requesting package id = " . $id,"debug");
+        
         if($id != null)
         {
             
@@ -53,6 +126,18 @@ class StoreController extends AppController{
     }
     
     
+    public function processCheckout()
+    {
+        $this->autoRender = false;
+        
+        $this->log("Process checkout Initiated....","debug");
+        
+        // initiate paypal with credentials
+        $this->initPaypalCredentials();
+        
+        // create the order
+        $this->createOrder();
+    }
     
     public function checkout()
     {
@@ -88,13 +173,6 @@ class StoreController extends AppController{
         $this->layout = "default_system";
         $this->set("title", "Order summary - Prime NikeBot");
         
-        // Paypal identity token
-        $identityToken = 'nAn02b7dN7UlDzpv1kSBcjPxt8B8bloWJfyZS-cIjEG-6tDQ39E9CWx6r4K';
-        
-        if(isset($_GET['tx']))
-        {
-            
-        }
     }
     
     public function botStore()
