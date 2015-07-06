@@ -82,13 +82,15 @@ class StoreController extends AppController{
         
         $this->log("Inside orderConfirmation()","debug");
         
-        $this->log("Token = " . $token,"debug");
-        $this->log("payerID es = " . $payerID,"debug");
+        $this->Paypal = new Paypal(array(
+            'sandboxMode' => true,
+            'nvpUsername' => 'christianfeob_api1.yahoo.com',
+            'nvpPassword' => '6NMRPNQU2A47KB52',
+            'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
+        ));
         
         try {
-            $this->log("Trying....with token = " . $token,"debug");
             $details = $this->Paypal->getExpressCheckoutDetails($token);
-            $this->log("Inside catch this is the details = " . print_r($details,true),"debug");
         } catch (Exception $e) {
             $this->log("Catching an error...","debug");
             $this->log("Paypal Error: " . $e->getMessage(),"debug");
