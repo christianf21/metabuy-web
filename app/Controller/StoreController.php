@@ -40,14 +40,14 @@ class StoreController extends AppController{
     private function createOrder()
     {
         $this->autoRender = false;
-        
+        App::uses('Paypal', 'Paypal.Lib');
         $this->log("Creating order for Paypal","debug");
         
         $order = array(
             'description'=>'Your purchase with Prime NikeBots store',
             'currency'=>'USD',
-            'return'=>$this->base.'/store/orderConfirmation',
-            'cancel'=>$this->base.'/store/orderCancelled',
+            'return'=>Router::url('/', true).'store/orderConfirmation',
+            'cancel'=>Router::url('/', true).'store/orderCancelled',
             'custom'=>'Software',
             'shipping'=>'0.0',
             'items'=>array(
@@ -62,28 +62,39 @@ class StoreController extends AppController{
         );
         
         try {
-            $this->log("The order parameters = " . print_r($order,true),"debug");
-            $this->log("About to setExpressCheckout(order)...","debug");
-            $this->Paypal->setExpressCheckout($order);
+            
+            $url = $this->Paypal->setExpressCheckout($order);
+            $this->redirect($url);
         }
         catch(Exception $e){
             $this->log("Error: " . $e->getMessage(),"debug");
         }
     }
     
-    public function orderConfirmation($token)
+    public function orderConfirmation()
     {
-        $this->layout = "ajax";
-        $details = null;
+        $this->layout = "default_system";
+        $this->set("title", "Checkout - Prime NikeBot");
+        App::uses('Paypal', 'Paypal.Lib');
+         
+        $token = $_REQUEST['token'];
+        $payerID = $_REQUEST['PayerID'];
         
-        $this->log("Inside orderConfirmation","debug");
+        $this->log("Inside orderConfirmation()","debug");
+        
+        $this->log("Token = " . $token,"debug");
+        $this->log("payerID es = " . $payerID,"debug");
         
         try {
+            $this->log("Trying....with token = " . $token,"debug");
             $details = $this->Paypal->getExpressCheckoutDetails($token);
+            $this->log("Inside catch this is the details = " . print_r($details,true),"debug");
         } catch (Exception $e) {
+            $this->log("Catching an error...","debug");
             $this->log("Paypal Error: " . $e->getMessage(),"debug");
         }      
         
+        $this->set("info",$details);
         $this->log("OrderConfirmation() details = " . print_r($details,true),"debug");
     }
     

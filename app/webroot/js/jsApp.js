@@ -2,6 +2,7 @@
     
     var app = angular.module("system", []);
     var base = "http://localhost/nikebot/web";
+    //var base = "http://primenikebot.com";
     
     app.controller("CartController", [ '$http', function($http){
         var vm = this;
