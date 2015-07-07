@@ -15,7 +15,7 @@ class StoreController extends AppController{
     //put your code here
     
     public $name ='Store';
-    public $uses= array('User','UserType','ShopingCart','Product');
+    public $uses= array('User','UserType','ShopingCart','Product','Order');
     
     public function beforeFilter()
     {
@@ -78,16 +78,16 @@ class StoreController extends AppController{
             $this->Session->write("PaypalOrder", $order);
         
         // System Order
-            $this->Order->new();
+            $this->Order->create();
                 $this->request->data['Order']['fk_user'] = $userId;
                 $this->request->data['Order']['total'] = $total;
                 $this->request->data['Order']['fee'] = 0;
                 $this->request->data['Order']['status'] = "PENDING";
                 $this->request->data['Order']['transaction_id'] = "";
-                $this->request->data['Order']['fk_code'] = NULL;
                 $this->request->data['Order']['created'] = date("Y-m-d H:i:s");
                 $this->request->data['Order']['modified'] = date("Y-m-d H:i:s");
             $this->Order->save($this->request->data);
+            $this->Session->write("SystemOrder",  $this->Order->id);
         
         try {
             $url = $this->Paypal->setExpressCheckout($order);
@@ -110,7 +110,12 @@ class StoreController extends AppController{
         
         try {
             
-            $this->initPaypalCredentials();
+            $this->Paypal = new Paypal(array(
+                'sandboxMode' => true,
+                'nvpUsername' => Configure::read('paypal-api-username'),
+                'nvpPassword' => Configure::read('paypal-api-password'),
+                'nvpSignature' => Configure::read('paypal-api-signature')
+            ));
             $details = $this->Paypal->getExpressCheckoutDetails($token);
             
         } catch (Exception $e) {
@@ -143,12 +148,34 @@ class StoreController extends AppController{
                 if($info['PAYMENTINFO_0_PAYMENTSTATUS'] == 'Completed')
                 {
                     // ORDER COMPLETED, ACCEPTED, CREATE AN ORDER
-                    $this->redirect(array("controller"=>"store","action"=>"orderComplete"));
+                    $orderId = $this->Session->read("SystemOrder");
+                    $this->Order->read(null,  $orderId);
+                    $this->Order->set(array(
+                            "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
+                            "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
+                            "status"=>"Completed",
+                            "modified"=>date("Y-m-d H:i:s")
+                    ));
+                    $this->Order->save();
+                    $this->Session->delete("SystemOrder");
+                    
+                    $this->redirect(array("controller"=>"store","action"=>"orderComplete"),$orderId);
+                    
                 }
                 else
                 {
                     // ORDER NOT COMPLETED, CANCELLED
-                    $this->redirect(array("controller"=>"store","action"=>"orderCancelled"));
+                    $orderId = $this->Session->read("SystemOrder");
+                    $this->Order->read(null,  $orderId);
+                    $this->Order->set(array(
+                            "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
+                            "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
+                            "status"=>$info['PAYMENTINFO_0_PAYMENTSTATUS'],
+                            "modified"=>date("Y-m-d H:i:s")
+                    ));
+                    $this->Order->save();
+                    
+                    $this->redirect(array("controller"=>"store","action"=>"orderCancelled"),$orderId);
                 }
             }
             
@@ -169,22 +196,30 @@ class StoreController extends AppController{
         return $total;
     }
     
-    public function orderComplete()
+    public function orderComplete($orderId)
     {
         $this->layout = "default_system";
         $this->set("title", "Your Completed Order - Prime NikeBot");
         
-        $order = $this->Session->read("PaypalOrder");
+        $order = $this->Order->getOrder($orderId);
+        
+        $this->set("order",$order);
         
         $this->set("products",$order['items']);
         $this->Session->delete("PaypalOrder");
     }
     
-    public function orderCancelled($token)
+    public function orderCancelled($orderId)
     {
-        $this->layout = "ajax";
+        $this->layout = "default_system";
+        $this->set("title", "Order Cancelled - Prime NikeBot");
         
-        $this->log("Order Cancelled :(","debug");
+        $order = $this->Order->getOrder($orderId);
+        
+        $this->set("order",$order);
+        
+        $this->set("products",$order['items']);
+        $this->Session->delete("PaypalOrder");
     }
     
     private function __getProductsFromPaypalOrder($details)

@@ -70,7 +70,7 @@
                 ?>
                 
                 <div class="container-fluid input-container" id="confirm-order-wrap">
-                    <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"processOrder",$token,$payerID)) ?>" class="btn btn-success">Complete Order</a> or <a class="normal-link">cancel and go back</a>
+                    <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"processOrder",$token,$payerID)) ?>" class="btn btn-success">Complete Order</a> or <a class="normal-link">cancel</a>
                 </div>
                 
             </div>
