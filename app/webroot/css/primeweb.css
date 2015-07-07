@@ -259,3 +259,33 @@ ul.smaller-howitworks li
 {
     color:#0094D5;;
 }
+
+.extra-info{
+    width:80%;
+    margin:0 auto;
+}
+
+.client-info-order td.table-label-info {
+  max-width: 80px;
+}
+
+table.client-info-order{
+    max-width: 600px !important;
+}
+
+.prod-description-order
+{
+    font-style: italic;
+    font-size:13px;
+}
+
+.prod-name-order
+{
+    font-weight:bold;
+}
+
+#confirm-order-wrap
+{
+    text-align:center;
+    padding:10px;
+}

@@ -55,11 +55,20 @@ class StoreController extends AppController{
                     'name'=>'Complete PrimeBot',
                     'description'=>'Complete Package of the Prime NikeBot Chrome Extension.',
                     'tax'=>0,
+                    'subtotal'=>159.99,
+                    'qty'=>1
+                ),
+                1 => array(
+                    'name'=>'Basic PrimeBot',
+                    'description'=>'Basic Package of the Prime NikeBot Chrome Extension.',
+                    'tax'=>0,
                     'subtotal'=>129.99,
                     'qty'=>1
                 )
             )
         );
+        
+        $this->Session->write("PaypalOrder", $order);
         
         try {
             
@@ -71,10 +80,11 @@ class StoreController extends AppController{
         }
     }
     
+    // getExpressCheckoutPayment
     public function orderConfirmation()
     {
         $this->layout = "default_system";
-        $this->set("title", "Checkout - Prime NikeBot");
+        $this->set("title", "Review Order - Prime NikeBot");
         App::uses('Paypal', 'Paypal.Lib');
          
         $token = $_REQUEST['token'];
@@ -96,12 +106,47 @@ class StoreController extends AppController{
         }      
         
         $this->set("info",$details);
-        $this->log("OrderConfirmation() details = " . print_r($details,true),"debug");
+        
+        $products = $this->__getProductsFromPaypalOrder($details);
+        $this->set("products",$products);
+    }
+    
+    // doExpressCheckoutPayment
+    public function processOrder($token, $payerId)
+    {
+        $this->autoRender = false;
+        App::uses('Paypal', 'Paypal.Lib');
+        
+        $order = $this->Session->read("PaypalOrder");
+        $order['return'] = Router::url('/', true).'store/orderComplete';
+        $order['sucess'] = Router::url('/', true).'store/orderComplete';
+        
+        try {
+            $this->Paypal = new Paypal(array(
+                'sandboxMode' => true,
+                'nvpUsername' => 'christianfeob_api1.yahoo.com',
+                'nvpPassword' => '6NMRPNQU2A47KB52',
+                'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
+            ));
+            
+            $info = $this->Paypal->doExpressCheckoutPayment($order, $token, $payerId);  
+            
+            if(isset($info))
+            {
+                $this->redirect(array("controller"=>"store","action"=>"orderComplete"));
+            }
+            
+        } catch (Exception $e) {
+            $this->log("ERROR: " . print_r($e->getMessage(),true),"debug");
+        }   
     }
     
     public function orderComplete()
     {
+        $this->layout = "default_system";
+        $this->set("title", "Your Completed Order - Prime NikeBot");
         
+        $this->Session->delete("PaypalOrder");
     }
     
     public function orderCancelled($token)
@@ -111,6 +156,37 @@ class StoreController extends AppController{
         $this->log("Order Cancelled :(","debug");
     }
     
+    private function __getProductsFromPaypalOrder($details)
+    {
+        // set up products to show
+        $products = array();
+        $howMany = 0;
+        
+            // first detect how many we have, will never have more than 10
+            for($i = 0; $i<=10; $i++)
+            {
+                if(!isset($details['L_NAME'.$i]))
+                {
+                    $howMany = $i;
+                    break;
+                }
+            }
+            
+            // setup the products array
+            for($i = 0; $i<$howMany; $i++)
+            {
+                $tmp = array(
+                    'name'=>$details['L_NAME'.$i],
+                    'qty'=>$details['L_QTY'.$i],
+                    'price'=>$details['L_AMT'.$i],
+                    'desc'=>$details['L_DESC'.$i]
+                );
+                
+                array_push($products, $tmp);
+            }
+            
+        return $products;
+    }
     
     public function requestPackage($id = null)
     {
