@@ -94,11 +94,9 @@
                     <input type="checkbox" id="terms-check"><span class='negrita'>I certify that I have read and agree to the terms.</span>
                     <div id="checkout-button-wrap">
                         <a href="<?php echo $this->Html->url(array('controller'=>'store','action'=>'processCheckout')) ?>" class="btn btn-success">Process Checkout</a>
+                        <p><img style="max-width:220px;margin-top:10px;" src="<?php echo $this->base."/img/accepted-payments.png" ?>"></p>
                     </div>
                 </div>
-                
-                
-                
                 
                 
                 

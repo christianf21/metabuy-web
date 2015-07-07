@@ -27,51 +27,69 @@ class StoreController extends AppController{
         $this->autoRender = false;
         App::uses('Paypal', 'Paypal.Lib');
         
-        $this->log("Initiating paypal credentials instance","debug");
-
         $this->Paypal = new Paypal(array(
             'sandboxMode' => true,
-            'nvpUsername' => 'christianfeob_api1.yahoo.com',
-            'nvpPassword' => '6NMRPNQU2A47KB52',
-            'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
+            'nvpUsername' => Configure::read('paypal-api-username'),
+            'nvpPassword' => Configure::read('paypal-api-password'),
+            'nvpSignature' => Configure::read('paypal-api-signature')
         ));
     }
     
+    // setExpressCheckoutPayment
     private function createOrder()
     {
         $this->autoRender = false;
         App::uses('Paypal', 'Paypal.Lib');
-        $this->log("Creating order for Paypal","debug");
         
-        $order = array(
-            'description'=>'Your purchase with Prime NikeBots store',
-            'currency'=>'USD',
-            'return'=>Router::url('/', true).'store/orderConfirmation',
-            'cancel'=>Router::url('/', true).'store/orderCancelled',
-            'custom'=>'Software',
-            'shipping'=>'0.0',
-            'items'=>array(
-                0 => array(
-                    'name'=>'Complete PrimeBot',
-                    'description'=>'Complete Package of the Prime NikeBot Chrome Extension.',
-                    'tax'=>0,
-                    'subtotal'=>159.99,
-                    'qty'=>1
-                ),
-                1 => array(
-                    'name'=>'Basic PrimeBot',
-                    'description'=>'Basic Package of the Prime NikeBot Chrome Extension.',
-                    'tax'=>0,
-                    'subtotal'=>129.99,
-                    'qty'=>1
-                )
-            )
-        );
+        $userId = $this->Session->read("userId");
         
-        $this->Session->write("PaypalOrder", $order);
+        // Products
+        $products = $this->ShopingCart->getCartByUser($userId);
+        $total = $this->__calculateTotalFromCart($products);
+        
+        // For paypal array
+            $items = array();
+        
+            foreach($products as $p)
+            {
+                $info = $this->Product->getProductInfo($p['ShopingCart']['fk_product']);
+                
+                $tmp = array(
+                    'name'=>$info['Product']['title']." ".$info['ProductType']['type_name'],
+                    'description'=>$info['Product']['description'],
+                    'tax'=>0,
+                    'subtotal'=>$info['Product']['price'],
+                    'qty'=>1
+                );
+                
+                array_push($items,$tmp);
+            }
+        
+        // Paypal Order
+            $order = array(
+                'description'=>'Your purchase with Prime NikeBot webstore',
+                'currency'=>'USD',
+                'return'=>Router::url('/', true).'store/orderConfirmation',
+                'cancel'=>Router::url('/', true).'store/orderCancelled',
+                'custom'=>'Software',
+                'shipping'=>'0.0',
+                'items'=>$items
+            );
+            $this->Session->write("PaypalOrder", $order);
+        
+        // System Order
+            $this->Order->new();
+                $this->request->data['Order']['fk_user'] = $userId;
+                $this->request->data['Order']['total'] = $total;
+                $this->request->data['Order']['fee'] = 0;
+                $this->request->data['Order']['status'] = "PENDING";
+                $this->request->data['Order']['transaction_id'] = "";
+                $this->request->data['Order']['fk_code'] = NULL;
+                $this->request->data['Order']['created'] = date("Y-m-d H:i:s");
+                $this->request->data['Order']['modified'] = date("Y-m-d H:i:s");
+            $this->Order->save($this->request->data);
         
         try {
-            
             $url = $this->Paypal->setExpressCheckout($order);
             $this->redirect($url);
         }
@@ -92,13 +110,7 @@ class StoreController extends AppController{
         
         try {
             
-            $this->Paypal = new Paypal(array(
-                'sandboxMode' => true,
-                'nvpUsername' => 'christianfeob_api1.yahoo.com',
-                'nvpPassword' => '6NMRPNQU2A47KB52',
-                'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
-            ));
-        
+            $this->initPaypalCredentials();
             $details = $this->Paypal->getExpressCheckoutDetails($token);
             
         } catch (Exception $e) {
@@ -119,21 +131,25 @@ class StoreController extends AppController{
         
         $order = $this->Session->read("PaypalOrder");
         $order['return'] = Router::url('/', true).'store/orderComplete';
-        $order['sucess'] = Router::url('/', true).'store/orderComplete';
+        $order['success'] = Router::url('/', true).'store/orderComplete';
         
-        try {
-            $this->Paypal = new Paypal(array(
-                'sandboxMode' => true,
-                'nvpUsername' => 'christianfeob_api1.yahoo.com',
-                'nvpPassword' => '6NMRPNQU2A47KB52',
-                'nvpSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9'
-            ));
-            
+        try 
+        {
+            $this->initPaypalCredentials();
             $info = $this->Paypal->doExpressCheckoutPayment($order, $token, $payerId);  
             
             if(isset($info))
             {
-                $this->redirect(array("controller"=>"store","action"=>"orderComplete"));
+                if($info['PAYMENTINFO_0_PAYMENTSTATUS'] == 'Completed')
+                {
+                    // ORDER COMPLETED, ACCEPTED, CREATE AN ORDER
+                    $this->redirect(array("controller"=>"store","action"=>"orderComplete"));
+                }
+                else
+                {
+                    // ORDER NOT COMPLETED, CANCELLED
+                    $this->redirect(array("controller"=>"store","action"=>"orderCancelled"));
+                }
             }
             
         } catch (Exception $e) {
@@ -141,11 +157,26 @@ class StoreController extends AppController{
         }   
     }
     
+    private function __calculateTotalFromCart($products)
+    {
+        $total = 0;
+        
+        foreach($products as $product)
+        {
+            $total += $product['ShopingCart']['price'];
+        }
+        
+        return $total;
+    }
+    
     public function orderComplete()
     {
         $this->layout = "default_system";
         $this->set("title", "Your Completed Order - Prime NikeBot");
         
+        $order = $this->Session->read("PaypalOrder");
+        
+        $this->set("products",$order['items']);
         $this->Session->delete("PaypalOrder");
     }
     
@@ -218,12 +249,9 @@ class StoreController extends AppController{
         }
     }
     
-    
     public function processCheckout()
     {
         $this->autoRender = false;
-        
-        $this->log("Process checkout Initiated....","debug");
         
         // initiate paypal with credentials
         $this->initPaypalCredentials();
@@ -326,7 +354,6 @@ class StoreController extends AppController{
             }
         }
     }
-    
     
     public function getCartProducts()
     {

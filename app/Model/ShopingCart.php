@@ -49,12 +49,7 @@ class ShopingCart extends AppModel{
                 
         );
         
-        $this->log("Search parameters for cart = " . print_r($parameters,true),"debug");
-        
         $res = $this->find("all",$parameters);
-        
-        $this->log("Response = " . print_r($res,true),"debug");
-        
         return $res;
     }
     

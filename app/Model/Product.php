@@ -18,6 +18,12 @@ class Product extends AppModel{
     public $useTable='product';
     public $primaryKey='id';
     
+    public $belongsTo = array(
+        'ProductType'=>array(
+            'foreignKey'=>'fk_type'
+        )
+    );
+    
     public function getProducts()
     {
         $parameters = array(
@@ -36,6 +42,14 @@ class Product extends AppModel{
             'recursive'=>-1,
             'conditions'=>array(
                 'Product.id'=>$id
+            ),
+            'joins'=>array(
+                array(
+                    'table'=>'type',
+                    'alias'=>'ProductType',
+                    'type'=>'INNER',
+                    'conditions'=>array('Product.fk_type=ProductType.id')
+                )
             )
         );
         
