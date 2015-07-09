@@ -30,7 +30,7 @@
                     
                     <tr>
                         <td style="text-align:right;font-weight: bold;" colspan=3>
-                            GRAND TOTAL<span id="checkout-total-price">$<?php echo $info['PAYMENTREQUEST_0_AMT'] ?></span>
+                            TOTAL<span id="checkout-total-price">$<?php echo $info['PAYMENTREQUEST_0_AMT'] ?></span>
                         </td>
                     </tr>
                 </table>
