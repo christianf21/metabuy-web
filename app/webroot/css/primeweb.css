@@ -308,3 +308,14 @@ table.client-info-order{
     pointer-events: true;
     cursor:pointer;
 }
+
+#products-order-complete
+{
+    width:65%;
+    text-align:center;
+}
+
+.bold-text
+{
+    font-weight:bold !important;
+}

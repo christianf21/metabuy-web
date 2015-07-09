@@ -69,8 +69,8 @@
                     $payerID = $info['PAYERID'];
                 ?>
                 
-                <div class="container-fluid input-container" id="confirm-order-wrap">
-                    <a href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"processOrder",$token,$payerID)) ?>" class="btn btn-success">Complete Order</a> or <a class="normal-link">cancel</a>
+                <div ng-controller="CheckoutController as checkout" class="container-fluid input-container" id="confirm-order-wrap">
+                    <a ng-click="checkout.processCheckout()" href="<?php echo $this->Html->url(array("controller"=>"store","action"=>"processOrder",$token,$payerID)) ?>" class="btn btn-success">Complete Order</a> or <a class="normal-link">cancel</a>
                 </div>
                 
             </div>

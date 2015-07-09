@@ -125,6 +125,8 @@ class StoreController extends AppController{
         $this->set("info",$details);
         
         $products = $this->__getProductsFromPaypalOrder($details);
+        $this->Session->write("PaypalProducts",$products);
+        
         $this->set("products",$products);
     }
     
@@ -162,6 +164,8 @@ class StoreController extends AppController{
                         $this->Order->save();
                         $this->Session->delete("SystemOrder");
 
+                        $this->__createProductItemsFromOrder($this->Order->id);
+                        
                         $this->redirect(array("controller"=>"store","action"=>"orderComplete",$orderId));
                         break;
                     
@@ -199,6 +203,27 @@ class StoreController extends AppController{
         }   
     }
     
+    private function __createProductItemsFromOrder($systemOrder)
+    {
+        $products = $this->Session->read("PaypalProducts");
+       
+        // find the id of each and create ItemProduct
+        foreach ($products as $index=>$item)
+        {
+            $this->log("Creating item_product[".$index."]","debug");
+            $name = trim($item['name']);
+            $details = $this->Product->getProductByName($name);
+            
+            $this->ItemProduct->create();
+            $this->request->data['ItemProduct']['fk_product'] = $details['Product']['id'];
+            $this->request->data['ItemProduct']['fk_order'] = $systemOrder;
+            $this->request->data['ItemProduct']['fk_user'] = $this->Session->read("userId");
+            $this->request->data['ItemProduct']['created'] = date("Y-m-d H:i:s");
+            $this->request->data['ItemProduct']['item_price'] = $details['Product']['price'];
+            $this->ItemProduct->save($this->request->data);
+        }
+    }
+    
     private function __calculateTotalFromCart($products)
     {
         $total = 0;
@@ -217,7 +242,6 @@ class StoreController extends AppController{
         $this->set("title", "Your Completed Order - Prime NikeBot");
         
         $order = $this->Order->getOrder($orderId);
-        
         $products = $this->ItemProduct->getProductsFromOrder($orderId);
         
             foreach($products as $index=>$item)

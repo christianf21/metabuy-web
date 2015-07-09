@@ -36,6 +36,18 @@ class Product extends AppModel{
         return $this->find("all",$parameters);
     }
     
+    public function getProductByName($name)
+    {
+        $parameters = array(
+            'recursive'=>-1,
+            'conditions'=>array(
+                'Product.title LIKE'=>"%".$name."%"
+            )
+        );
+        
+        return $this->find("first",$parameters);
+    }
+    
     public function getProductInfo($id)
     {
         $parameters = array(

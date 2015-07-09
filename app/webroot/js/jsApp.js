@@ -88,11 +88,15 @@
             }
             else
             {
-                $.blockUI({ message: "Just a moment...we're redirecting you to paypal!" });
+                $.blockUI({ message: "Just a moment...we're redirecting you to Paypal!" });
                 var url = $("#checkout-location-url").val();
                 window.location.href = url;
             }
             
+        };
+        
+        this.processCheckout = function(){
+            $.blockUI({ message: "We're authorizing your actions with Paypal, will take a few seconds!" });
         };
         
         function updateTotal()
