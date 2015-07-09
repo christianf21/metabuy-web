@@ -82,7 +82,7 @@
         
         this.doCheckout = function () {
             
-            if(!vm.terms)
+            if(!$("input[name='terms-check']:checked").length>0)
             {
                 sweetAlert("Oops...", "You need to accept our Terms to continue!", "error");
             }
