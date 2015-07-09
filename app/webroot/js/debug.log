@@ -1,0 +1,28 @@
+2015-07-06 12:01:31 Debug: Process checkout Initiated....
+2015-07-06 12:01:31 Debug: Initiating paypal credentials instance
+2015-07-06 12:01:31 Debug: Creating order for Paypal
+2015-07-06 12:01:31 Debug: The order parameters = Array
+(
+    [description] => Your purchase with Prime NikeBots store
+    [currency] => USD
+    [return] => /store/orderConfirmation
+    [cancel] => /store/orderCancelled
+    [custom] => Software
+    [shipping] => 0.0
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [name] => Complete PrimeBot
+                    [description] => Complete Package of the Prime NikeBot Chrome Extension.
+                    [tax] => 0
+                    [subtotal] => 129.99
+                    [qty] => 1
+                )
+
+        )
+
+)
+
+2015-07-06 12:01:31 Debug: About to setExpressCheckout(order)...
+2015-07-06 12:01:32 Debug: Error: ReturnURL is invalid.

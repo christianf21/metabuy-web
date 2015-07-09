@@ -31,13 +31,9 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
         
-        /***** PAYPAL *****/
-            Configure::write('paypal-api-username', 'christianfeob_api1.yahoo.com');
-            Configure::write('paypal-api-password', '6NMRPNQU2A47KB52');
-            Configure::write('paypal-api-signature', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AuP-wMymPFCaXfFg0-g06RdSs7w9');
-        /******************/
+       
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
