@@ -88,6 +88,7 @@
             }
             else
             {
+                $.blockUI({ message: "Just a moment...we're redirecting you to paypal!" });
                 var url = $("#checkout-location-url").val();
                 window.location.href = url;
             }
