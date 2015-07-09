@@ -22,6 +22,9 @@ class StoreController extends AppController{
         
     }
     
+    /**
+     * Initiates a Paypal instance with the store's paypal credentials.
+     */
     private function initPaypalCredentials()
     {
         $this->autoRender = false;
@@ -35,7 +38,11 @@ class StoreController extends AppController{
         ));
     }
     
-    // setExpressCheckoutPayment
+    /**
+     * setExpressCheckoutPayment() method from Paypal API.
+     * 
+     * Here we set the order details to paypal to initate an Express Checkout process.
+     */
     private function createOrder()
     {
         $this->autoRender = false;
@@ -98,7 +105,13 @@ class StoreController extends AppController{
         }
     }
     
-    // getExpressCheckoutPayment
+    /**
+     * getExpressCheckoutPaymanet() method from Paypal API.
+     * 
+     * This page is shown after the user has confirmed they will want to do
+     * this order. In this page the user clicks Process Order and paypal will 
+     * transfer this funds from the Client to the Store.
+     */
     public function orderConfirmation()
     {
         $this->layout = "default_system";
@@ -130,7 +143,15 @@ class StoreController extends AppController{
         $this->set("products",$products);
     }
     
-    // doExpressCheckoutPayment
+    /**
+     * doExpressCheckoutPayment() method from Paypal API.
+     * 
+     * Where we tell Paypal to process we ordered before. Transfer funds from
+     * client to store.
+     * 
+     * @param type $token The Paypal order token
+     * @param type $payerId The PayerID from Paypal
+     */
     public function processOrder($token, $payerId)
     {
         $this->autoRender = false;
@@ -165,6 +186,7 @@ class StoreController extends AppController{
                         $this->Session->delete("SystemOrder");
 
                         $this->__createProductItemsFromOrder($this->Order->id);
+                        $this->__removeItemsFromCart();
                         
                         $this->redirect(array("controller"=>"store","action"=>"orderComplete",$orderId));
                         break;
@@ -203,6 +225,21 @@ class StoreController extends AppController{
         }   
     }
     
+    /**
+     * Deletes all cart items from user
+     */
+    private function __removeItemsFromCart()
+    {
+        $cart = $this->ShopingCart->getCartByUser($this->Session->read("userId"));
+        
+        foreach($cart as $item)
+            $this->ShopingCart->delete($item['ShopingCart']['id']);
+    }
+    
+    /**
+     * Creates ItemProducts for a user after he has bought products.
+     * @param type $systemOrder The order ID.
+     */
     private function __createProductItemsFromOrder($systemOrder)
     {
         $products = $this->Session->read("PaypalProducts");
@@ -224,6 +261,11 @@ class StoreController extends AppController{
         }
     }
     
+    /**
+     * Returns the total price of all cart items combined.
+     * @param type $products
+     * @return type DOUBLE
+     */
     private function __calculateTotalFromCart($products)
     {
         $total = 0;
@@ -236,6 +278,10 @@ class StoreController extends AppController{
         return $total;
     }
     
+    /**
+     * Shows the final result of an order. This is shown after an order is complete.
+     * @param type $orderId The id of the order
+     */
     public function orderComplete($orderId)
     {
         $this->layout = "default_system";
@@ -258,6 +304,10 @@ class StoreController extends AppController{
         $this->Session->delete("PaypalOrder");
     }
     
+    /**
+     * Screen shown when an order has failed/cancelled/etc...
+     * @param type $orderId the order ID
+     */
     public function orderCancelled($orderId)
     {
         $this->layout = "default_system";
@@ -271,6 +321,11 @@ class StoreController extends AppController{
         $this->Session->delete("PaypalOrder");
     }
     
+    /**
+     * Returns a formatted array of all the products Paypal is processing.
+     * @param type $details
+     * @return array
+     */
     private function __getProductsFromPaypalOrder($details)
     {
         // set up products to show
@@ -303,6 +358,10 @@ class StoreController extends AppController{
         return $products;
     }
     
+    /**
+     * Adds to cart a requested package.
+     * @param type $id the id of the product.
+     */
     public function requestPackage($id = null)
     {
         $this->autoRender = false;
@@ -333,6 +392,10 @@ class StoreController extends AppController{
         }
     }
     
+    /**
+     * The initial action when someone is creating an order to buy. Creates
+     * an order and initiates paypal instance credentials to process with.
+     */
     public function processCheckout()
     {
         $this->autoRender = false;
@@ -344,6 +407,9 @@ class StoreController extends AppController{
         $this->createOrder();
     }
     
+    /**
+     * Checkout screen that shows all products to buy.
+     */
     public function checkout()
     {
         $this->layout = "default_system";
@@ -373,6 +439,9 @@ class StoreController extends AppController{
             
     }
     
+    /**
+     * Deprecated...
+     */
     public function checkoutComplete()
     {
         $this->layout = "default_system";
@@ -380,6 +449,9 @@ class StoreController extends AppController{
         
     }
     
+    /**
+     * Deprecated, bot store will be the shown packages in the landing page.
+     */
     public function botStore()
     {
         $this->layout = "default_system";
@@ -387,6 +459,9 @@ class StoreController extends AppController{
         
     }
     
+    /**
+     * Removes a specified cart item from cart. Used with ajax, angular.
+     */
     public function removeCartItem()
     {
         $this->layout='ajax';
@@ -439,6 +514,10 @@ class StoreController extends AppController{
         }
     }
     
+    /**
+     * Returns an array of the products currently in cart. Doesnt matter if
+     * user is logged in or is a guest.
+     */
     public function getCartProducts()
     {
         $this->layout='ajax';
