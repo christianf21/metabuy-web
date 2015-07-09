@@ -289,3 +289,10 @@ table.client-info-order{
     text-align:center;
     padding:10px;
 }
+
+#thank-you-purchase
+{
+    font-size: 32px;
+    color: green;
+    font-weight: bold;
+}
