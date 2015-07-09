@@ -31,7 +31,6 @@ class SystemController extends AppController{
        $this->layout = "default_system";
        $this->set("menudashboard","");
        
-       
        // Gather bot info - this is temporal while the bot system is done
        $bot = array(); // $this->BotPackage->getPackagesByUser($userId);
        
