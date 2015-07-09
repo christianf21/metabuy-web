@@ -15,7 +15,7 @@ class StoreController extends AppController{
     //put your code here
     
     public $name ='Store';
-    public $uses= array('User','UserType','ShopingCart','Product','Order');
+    public $uses= array('User','UserType','ShopingCart','Product','ProductType','ItemProduct','Order');
     
     public function beforeFilter()
     {
@@ -135,8 +135,6 @@ class StoreController extends AppController{
         App::uses('Paypal', 'Paypal.Lib');
         
         $order = $this->Session->read("PaypalOrder");
-        $order['return'] = Router::url('/', true).'store/orderComplete';
-        $order['success'] = Router::url('/', true).'store/orderComplete';
         
         try 
         {
@@ -145,40 +143,57 @@ class StoreController extends AppController{
             
             if(isset($info))
             {
-                if($info['PAYMENTINFO_0_PAYMENTSTATUS'] == 'Completed')
+                $status = $info['PAYMENTINFO_0_PAYMENTSTATUS'];
+                
+                switch($status)
                 {
-                    // ORDER COMPLETED, ACCEPTED, CREATE AN ORDER
-                    $orderId = $this->Session->read("SystemOrder");
-                    $this->Order->read(null,  $orderId);
-                    $this->Order->set(array(
-                            "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
-                            "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
-                            "status"=>"Completed",
-                            "modified"=>date("Y-m-d H:i:s")
-                    ));
-                    $this->Order->save();
-                    $this->Session->delete("SystemOrder");
+                    case "Completed-Funds-Held":
+                    case "Processed":
+                    case "Completed":
+                        // ORDER COMPLETED, ACCEPTED, CREATE AN ORDER
+                        $orderId = $this->Session->read("SystemOrder");
+                        $this->Order->read(null,  $orderId);
+                        $this->Order->set(array(
+                                "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
+                                "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
+                                "status"=>"Completed",
+                                "modified"=>date("Y-m-d H:i:s")
+                        ));
+                        $this->Order->save();
+                        $this->Session->delete("SystemOrder");
+
+                        $this->redirect(array("controller"=>"store","action"=>"orderComplete",$orderId));
+                        break;
                     
-                    $this->redirect(array("controller"=>"store","action"=>"orderComplete"),$orderId);
+                    default:
+                    case "Canceled-Reversal":
+                    case "None":
+                    case "Canceled":
+                    case "Denied":
+                    case "Expired":
+                    case "Failed":
+                    case "Voided":
+                    case "Pending":
+                        // ORDER NOT COMPLETED, CANCELLED
+                        $orderId = $this->Session->read("SystemOrder");
+                        $this->Order->read(null,  $orderId);
+                        $this->Order->set(array(
+                                "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
+                                "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
+                                "status"=>$info['PAYMENTINFO_0_PAYMENTSTATUS'],
+                                "modified"=>date("Y-m-d H:i:s")
+                        ));
+                        $this->Order->save();
+
+                        $this->redirect(array("controller"=>"store","action"=>"orderCancelled"),$orderId);
+                        break;
                     
                 }
-                else
-                {
-                    // ORDER NOT COMPLETED, CANCELLED
-                    $orderId = $this->Session->read("SystemOrder");
-                    $this->Order->read(null,  $orderId);
-                    $this->Order->set(array(
-                            "fee"=>$info['PAYMENTINFO_0_FEEAMT'],
-                            "transaction_id"=>$info['PAYMENTINFO_0_TRANSACTIONID'],
-                            "status"=>$info['PAYMENTINFO_0_PAYMENTSTATUS'],
-                            "modified"=>date("Y-m-d H:i:s")
-                    ));
-                    $this->Order->save();
-                    
-                    $this->redirect(array("controller"=>"store","action"=>"orderCancelled"),$orderId);
-                }
+                
             }
-            
+        
+        } catch (PaypalRedirectException $e) {
+            $this->redirect($e->getMessage()); 
         } catch (Exception $e) {
             $this->log("ERROR: " . print_r($e->getMessage(),true),"debug");
         }   
@@ -203,9 +218,19 @@ class StoreController extends AppController{
         
         $order = $this->Order->getOrder($orderId);
         
-        $this->set("order",$order);
+        $products = $this->ItemProduct->getProductsFromOrder($orderId);
         
-        $this->set("products",$order['items']);
+            foreach($products as $index=>$item)
+            {
+                $info = $this->Product->getProductInfo($item['ItemProduct']['fk_product']);
+                $type = $this->ProductType->getTypeInfo($info['Product']['fk_type']);
+                
+                $products[$index]['Product'] = $info['Product'];
+                $products[$index]['ProducType'] = $type['ProductType'];
+            }
+        
+        $this->set("products",$products);
+        $this->set("order",$order);
         $this->Session->delete("PaypalOrder");
     }
     

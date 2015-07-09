@@ -18,5 +18,15 @@ class ProductType extends AppModel{
     public $useTable='type';
     public $primaryKey='id';
     
-    
+    public function getTypeInfo($typeId)
+    {
+        $parameters = array(
+            'recursive'=>-1,
+            'conditions'=>array(
+                'ProductType.id'=>$typeId
+            )
+        );
+        
+        return $this->find("first",$parameters);
+    }
 }

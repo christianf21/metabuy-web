@@ -28,7 +28,10 @@ class Order extends AppModel{
            )
        );
        
-       return $this->find("first",$paremeters);
+       $res = $this->find("first",$paremeters);
+       $res['Order']['ref'] = date("Ymd",strtotime($res['Order']['created']))."-".$res['Order']['id'];
+       
+       return $res;
    }
     
 }
