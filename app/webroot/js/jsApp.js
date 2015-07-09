@@ -42,6 +42,15 @@
         var vm = this;
         vm.products = [];
         vm.total = 0;
+        vm.terms = false;
+        
+        this.updateTerms = function(){
+            
+            if(vm.terms === true)
+                vm.terms = false;
+            else
+                vm.terms = true;
+        };
         
         this.loadProducts = function(){
             
@@ -69,6 +78,20 @@
             error(function(data,status,headers,config){
                 console.log("error: " + data);
             });
+        };
+        
+        this.doCheckout = function () {
+            
+            if(!vm.terms)
+            {
+                sweetAlert("Oops...", "You need to accept our Terms to continue!", "error");
+            }
+            else
+            {
+                var url = $("#checkout-location-url").val();
+                window.location.href = url;
+            }
+            
         };
         
         function updateTotal()

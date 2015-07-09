@@ -91,9 +91,10 @@
                 
                 <div class='container-fluid input-container'>
                     <h4 class="checkout-title">Terms</h4>
-                    <input type="checkbox" id="terms-check"><span class='negrita'>I certify that I have read and agree to the terms.</span>
+                    <input type="checkbox" id="terms-check" ng-checked="checkout.terms" ng-click="checkout.changeTerms()"><span class='negrita'>I certify that I have read and agree to the terms.</span>
                     <div id="checkout-button-wrap">
-                        <a href="<?php echo $this->Html->url(array('controller'=>'store','action'=>'processCheckout')) ?>" class="btn btn-success">Process Checkout</a>
+                        <input type="hidden" id="checkout-location-url" value="<?php echo $this->Html->url(array('controller'=>'store','action'=>'processCheckout')) ?>">
+                        <a ng-click="checkout.doCheckout()" href class="btn btn-success">Process Checkout</a>
                         <p><img style="max-width:220px;margin-top:10px;" src="<?php echo $this->base."/img/accepted-payments.png" ?>"></p>
                     </div>
                 </div>
@@ -104,3 +105,9 @@
         </div>
         
     </div>
+
+<script type="text/javascript">
+
+    sweetAlert("Oops...", "You need to accept our Terms to continue!", "error");
+    
+</script>

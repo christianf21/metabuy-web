@@ -30,11 +30,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</title>
 	<?php
             echo $this->Html->meta('icon');
-
+            
             echo $this->fetch('meta');
             echo $this->fetch('css');
             echo $this->fetch('script');
-           
+            
                 echo $this->Html->css('alertify.core');
                 echo $this->Html->css('alertify.bootstrap');
             
@@ -42,6 +42,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             echo $this->Html->css('freelancer.css');
             echo $this->Html->css('primeweb.css');
             echo $this->Html->css('font-awesome.min.css');
+            echo $this->Html->css('sweetalert.css');
      ?>
     
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -79,9 +80,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     
         <?php
         
-             echo $this->Html->script('jquery');
+            echo $this->Html->script('jquery');
             echo $this->Html->script('jquery.validate.min');
             echo $this->Html->script('angular.min.js');
+            echo $this->Html->script('sweetalert.min');
             echo $this->Html->script('jsApp');
             
             echo $this->Html->script('alertify.min');
@@ -89,6 +91,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             
             echo $this->Html->script('primeweb');
             echo $this->Html->script('jsValidation');
+            
         ?>
 </body>
 </html>

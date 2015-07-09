@@ -296,3 +296,15 @@ table.client-info-order{
     color: green;
     font-weight: bold;
 }
+
+.inactive-button
+{
+    pointer-events: none;
+    cursor: default;
+}
+
+.normal-button
+{
+    pointer-events: true;
+    cursor:pointer;
+}
